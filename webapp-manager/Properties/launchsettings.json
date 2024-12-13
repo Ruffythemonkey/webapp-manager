@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "webapp-manager (Unpackaged)": {
+        "commandName": "Project"
+      },
+      "webapp-manager (Package)": {
+        "commandName": "MsixPackage"
+      }
+    }
+}
