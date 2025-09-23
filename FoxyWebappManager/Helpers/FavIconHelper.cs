@@ -1,6 +1,6 @@
-﻿namespace SharedFavIconLoad
+﻿namespace FoxyWebappManager.Helpers
 {
-    internal static class FavIcon
+    public static class FavIconHelper
     {
         public static async Task<string> IconLoadAsync(Uri uri)
         {
@@ -21,11 +21,8 @@
                 await File.WriteAllBytesAsync($"{file}.png", content);
             }
 
-
-            FoxyWebAppManager
-                .Helpers
-                .ImageToIconConverterHelper
-                .ConvertToIcon($"{file}.png", file, 64);
+                ImageToIconConverterHelper
+                    .ConvertToIcon($"{file}.png", file, 64);
 
             File.Delete($"{file}.png");
 

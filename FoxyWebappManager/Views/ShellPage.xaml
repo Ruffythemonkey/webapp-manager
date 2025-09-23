@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="FoxyWebappManager.Views.ShellPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Views="using:FoxyWebappManager.Views"
+    xmlns:behaviors="using:FoxyWebappManager.Behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="using:FoxyWebappManager.Helpers"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="OnLoaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            x:Name="AppTitleBar"
+            Height="36"
+            VerticalAlignment="Top"
+            Canvas.ZIndex="1"
+            IsHitTestVisible="True">
+            <Image
+                Width="16"
+                Height="16"
+                Margin="10 0 0 0"
+                HorizontalAlignment="Left"
+                Source="/Assets/WindowIcon.ico" />
+            <TextBlock
+                x:Name="AppTitleBarText"
+                Margin="38,0,0,0"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                TextWrapping="NoWrap" />
+        </Grid>
+        <Views:MainPage Grid.Row="1" />
+    </Grid>
+</Page>

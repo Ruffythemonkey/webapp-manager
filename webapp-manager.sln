@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapp-manager", "webapp-manager\webapp-manager.csproj", "{8582981A-4983-40E2-8C44-9E1A99BF4FE1}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedIO", "SharedIO\SharedIO.shproj", "{F186FA4F-F976-4196-B5D8-1B775E24AAE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapp-manager.Core", "webapp-manager.Core\webapp-manager.Core.csproj", "{0E59B00A-3E86-4E86-B04F-D41C9D634916}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxyWebappManager", "FoxyWebappManager\FoxyWebappManager.csproj", "{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedFavIconLoad", "SharedFavIconLoad\SharedFavIconLoad.shproj", "{F739054F-9048-4017-B656-16A74090D18F}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedIOService", "SharedIOService\SharedIOService.shproj", "{3A1D911C-B5DC-4BED-89C7-1768741F0B0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxyWebappManager.Core", "FoxyWebappManager.Core\FoxyWebappManager.Core.csproj", "{CA034449-6964-90F4-1AB1-D76749E2AD15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,36 +19,36 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|arm64.ActiveCfg = Debug|arm64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|arm64.Build.0 = Debug|arm64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|arm64.Deploy.0 = Debug|arm64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|x64.ActiveCfg = Debug|x64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|x64.Build.0 = Debug|x64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|x64.Deploy.0 = Debug|x64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|x86.ActiveCfg = Debug|x86
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|x86.Build.0 = Debug|x86
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Debug|x86.Deploy.0 = Debug|x86
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|arm64.ActiveCfg = Release|arm64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|arm64.Build.0 = Release|arm64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|arm64.Deploy.0 = Release|arm64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|x64.ActiveCfg = Release|x64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|x64.Build.0 = Release|x64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|x64.Deploy.0 = Release|x64
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|x86.ActiveCfg = Release|x86
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|x86.Build.0 = Release|x86
-		{8582981A-4983-40E2-8C44-9E1A99BF4FE1}.Release|x86.Deploy.0 = Release|x86
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Debug|arm64.ActiveCfg = Debug|arm64
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Debug|arm64.Build.0 = Debug|arm64
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Debug|x64.ActiveCfg = Debug|x64
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Debug|x64.Build.0 = Debug|x64
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Debug|x86.ActiveCfg = Debug|x86
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Debug|x86.Build.0 = Debug|x86
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Release|arm64.ActiveCfg = Release|arm64
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Release|arm64.Build.0 = Release|arm64
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Release|x64.ActiveCfg = Release|x64
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Release|x64.Build.0 = Release|x64
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Release|x86.ActiveCfg = Release|x86
-		{0E59B00A-3E86-4E86-B04F-D41C9D634916}.Release|x86.Build.0 = Release|x86
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|arm64.ActiveCfg = Debug|arm64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|arm64.Build.0 = Debug|arm64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|arm64.Deploy.0 = Debug|arm64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|x64.ActiveCfg = Debug|x64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|x64.Build.0 = Debug|x64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|x64.Deploy.0 = Debug|x64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|x86.ActiveCfg = Debug|x86
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|x86.Build.0 = Debug|x86
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Debug|x86.Deploy.0 = Debug|x86
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|arm64.ActiveCfg = Release|arm64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|arm64.Build.0 = Release|arm64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|arm64.Deploy.0 = Release|arm64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x64.ActiveCfg = Release|x64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x64.Build.0 = Release|x64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x64.Deploy.0 = Release|x64
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x86.ActiveCfg = Release|x86
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x86.Build.0 = Release|x86
+		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x86.Deploy.0 = Release|x86
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Debug|arm64.ActiveCfg = Debug|arm64
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Debug|arm64.Build.0 = Debug|arm64
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Debug|x64.ActiveCfg = Debug|x64
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Debug|x64.Build.0 = Debug|x64
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Debug|x86.ActiveCfg = Debug|x86
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Debug|x86.Build.0 = Debug|x86
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Release|arm64.ActiveCfg = Release|arm64
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Release|arm64.Build.0 = Release|arm64
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Release|x64.ActiveCfg = Release|x64
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Release|x64.Build.0 = Release|x64
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Release|x86.ActiveCfg = Release|x86
+		{CA034449-6964-90F4-1AB1-D76749E2AD15}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,8 +57,7 @@ Global
 		SolutionGuid = {67BA47C1-8B02-4FF7-A9C2-C95843F3E6E0}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		SharedIOService\SharedIOService.projitems*{3a1d911c-b5dc-4bed-89c7-1768741f0b0a}*SharedItemsImports = 13
-		SharedIOService\SharedIOService.projitems*{8582981a-4983-40e2-8c44-9e1a99bf4fe1}*SharedItemsImports = 5
-		SharedFavIconLoad\SharedFavIconLoad.projitems*{f739054f-9048-4017-b656-16a74090d18f}*SharedItemsImports = 13
+		SharedIO\SharedIO.projitems*{bc0912c0-1840-cfc5-83d4-31ea4381e5bf}*SharedItemsImports = 5
+		SharedIO\SharedIO.projitems*{f186fa4f-f976-4196-b5d8-1b775e24aae8}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
