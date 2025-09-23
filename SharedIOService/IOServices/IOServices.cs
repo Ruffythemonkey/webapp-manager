@@ -1,6 +1,6 @@
 ﻿using IWshRuntimeLibrary;
 
-namespace webapp_manager.Services
+namespace IOServices
 {
     public static class IOServices
     {

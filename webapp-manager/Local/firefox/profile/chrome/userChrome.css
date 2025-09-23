@@ -1,7 +1,3 @@
-/* Entferne die Suchleiste */
-#searchbar {
-  display: none !important;
-}
 
 /* Entferne die gesamte Tab-Leiste */
 #TabsToolbar {
@@ -9,33 +5,11 @@
 }
 
 /* Navigationsleiste entfernen */
-#nav-bar {
-  visibility: collapse !important;
+#urlbar-container {
+  visibility: hidden !important;
 }
 
-/* Menüleiste verstecken */
-#toolbar-menubar {
-  display: none !important;
-}
-
-/* Symbolleisten komplett ausblenden */
-#PersonalToolbar {
-  display: none !important;
-}
-
-/* Titelleiste entfernen (optional, aber riskant bei Kontrolle) */
-.titlebar {
-  display: none !important;
-}
-
-/* Entferne die Scrollbars (falls App den gesamten Platz nutzen soll) */
-scrollbar {
-  display: none !important;
-}
-
-/* Fenster-Symbol ändern */
-@-moz-document url("chrome://browser/content/browser.xhtml") {
-  #main-window {
-      list-style-image: url("file:///C:/escsoftde.png") !important;
-  }
+#main-menubar > menu {
+  visibility: hidden !important;
+  width: 0px !important;
 }

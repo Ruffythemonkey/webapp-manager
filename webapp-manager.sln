@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapp-manager", "webapp-manager\webapp-manager.csproj", "{8582981A-4983-40E2-8C44-9E1A99BF4FE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapp-manager.Core", "webapp-manager.Core\webapp-manager.Core.csproj", "{0E59B00A-3E86-4E86-B04F-D41C9D634916}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedFavIconLoad", "SharedFavIconLoad\SharedFavIconLoad.shproj", "{F739054F-9048-4017-B656-16A74090D18F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedIOService", "SharedIOService\SharedIOService.shproj", "{3A1D911C-B5DC-4BED-89C7-1768741F0B0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,5 +54,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67BA47C1-8B02-4FF7-A9C2-C95843F3E6E0}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedIOService\SharedIOService.projitems*{3a1d911c-b5dc-4bed-89c7-1768741f0b0a}*SharedItemsImports = 13
+		SharedIOService\SharedIOService.projitems*{8582981a-4983-40e2-8c44-9e1a99bf4fe1}*SharedItemsImports = 5
+		SharedFavIconLoad\SharedFavIconLoad.projitems*{f739054f-9048-4017-b656-16a74090d18f}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

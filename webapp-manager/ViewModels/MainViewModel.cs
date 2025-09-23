@@ -24,22 +24,22 @@ public partial class MainViewModel(FaviconWebLoadService favicon, ILocalSettings
     private DispatcherQueue dispatcher = DispatcherQueue.GetForCurrentThread();
 
     [ObservableProperty]
-    private string? webappname;
+    public partial string? Webappname { get; set; }
 
     [ObservableProperty]
-    private Uri? icon;
+    public partial Uri? Icon { get; set; }
 
     [ObservableProperty]
-    private string? webappurl;
+    public partial string? Webappurl { get; set; }
 
     [ObservableProperty]
-    private string? firefoxpath;
+    public partial string? Firefoxpath { get; set; }
 
     [ObservableProperty]
-    private string? message;
+    public partial string? Message { get; set; }
 
     [ObservableProperty]
-    private bool isBussy;
+    public partial bool IsBussy { get; set; }
 
     [RelayCommand]
     private void CloseMessage() => Message = null;
@@ -56,12 +56,12 @@ public partial class MainViewModel(FaviconWebLoadService favicon, ILocalSettings
         if (!Directory.Exists(local))
         {
             Directory.CreateDirectory(local);
-            IOServices.CopyFolder("Local", local);
+            IOServices.IOServices.CopyFolder("Local", local);
         }
 
         string output = $"{Firefoxpath} --profile {profiledir} --no-remote --url {Webappurl}";
         Debug.WriteLine(output);
-        IOServices.CreateShortcut(
+        IOServices.IOServices.CreateShortcut(
             shortcut, 
             Firefoxpath!, 
             $"--profile {profiledir} --no-remote --url {Webappurl}",
