@@ -24,7 +24,7 @@ public sealed partial class ShellPage : Page
         ViewModel = viewModel;
         InitializeComponent();
 
-        //ViewModel.NavigationService.Frame = NavigationFrame;
+        ViewModel.NavigationService.Frame = NavigateFrame;
         //ViewModel.NavigationViewService.Initialize(NavigationViewControl);
 
         // TODO: Set the title bar icon by updating /Assets/WindowIcon.ico.

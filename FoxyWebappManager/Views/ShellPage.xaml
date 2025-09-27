@@ -24,7 +24,7 @@
             <Image
                 Width="16"
                 Height="16"
-                Margin="10 0 0 0"
+                Margin="10,0,0,0"
                 HorizontalAlignment="Left"
                 Source="/Assets/WindowIcon.ico" />
             <TextBlock
@@ -34,6 +34,6 @@
                 Style="{StaticResource CaptionTextBlockStyle}"
                 TextWrapping="NoWrap" />
         </Grid>
-        <Views:MainPage Grid.Row="1" />
+        <Frame x:Name="NavigateFrame" Grid.Row="1" />
     </Grid>
 </Page>

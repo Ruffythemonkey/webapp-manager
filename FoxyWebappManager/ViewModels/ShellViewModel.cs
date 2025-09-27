@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-
 using FoxyWebappManager.Contracts.Services;
-using FoxyWebappManager.Views;
-
 using Microsoft.UI.Xaml.Navigation;
 
 namespace FoxyWebappManager.ViewModels;
@@ -10,20 +7,14 @@ namespace FoxyWebappManager.ViewModels;
 public partial class ShellViewModel : ObservableRecipient
 {
     [ObservableProperty]
-    private bool isBackEnabled;
+    private partial bool IsBackEnabled { get; set; }
 
     [ObservableProperty]
-    private object? selected;
+    private partial object? Selected { get; set; }
 
-    public INavigationService NavigationService
-    {
-        get;
-    }
+    public INavigationService NavigationService { get; }
 
-    public INavigationViewService NavigationViewService
-    {
-        get;
-    }
+    public INavigationViewService NavigationViewService { get; }
 
     public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService)
     {

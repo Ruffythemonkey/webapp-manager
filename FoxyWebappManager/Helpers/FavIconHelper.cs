@@ -14,15 +14,15 @@
 
             using (var cli = new HttpClient())
             {
-                var request = await cli.GetAsync($"https://icons.duckduckgo.com/ip3/{iconname}.ico");
+                var request = await cli.GetAsync($"https://www.google.com/s2/favicons?domain={iconname}&sz=64");
                 request.EnsureSuccessStatusCode();
 
                 var content = await request.Content.ReadAsByteArrayAsync();
                 await File.WriteAllBytesAsync($"{file}.png", content);
             }
 
-                ImageToIconConverterHelper
-                    .ConvertToIcon($"{file}.png", file, 64);
+            ImageToIconConverterHelper
+                .ConvertToIcon($"{file}.png", file, 64);
 
             File.Delete($"{file}.png");
 

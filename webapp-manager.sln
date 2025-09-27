@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxyWebappManager", "FoxyWe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxyWebappManager.Core", "FoxyWebappManager.Core\FoxyWebappManager.Core.csproj", "{CA034449-6964-90F4-1AB1-D76749E2AD15}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedStringMethods", "SharedStringMethods\SharedStringMethods.shproj", "{54638F95-38CC-4518-B732-6DC3E5591CBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|arm64 = Debug|arm64
@@ -57,7 +59,9 @@ Global
 		SolutionGuid = {67BA47C1-8B02-4FF7-A9C2-C95843F3E6E0}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedStringMethods\SharedStringMethods.projitems*{54638f95-38cc-4518-b732-6dc3e5591cbd}*SharedItemsImports = 13
 		SharedIO\SharedIO.projitems*{bc0912c0-1840-cfc5-83d4-31ea4381e5bf}*SharedItemsImports = 5
+		SharedStringMethods\SharedStringMethods.projitems*{bc0912c0-1840-cfc5-83d4-31ea4381e5bf}*SharedItemsImports = 5
 		SharedIO\SharedIO.projitems*{f186fa4f-f976-4196-b5d8-1b775e24aae8}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
