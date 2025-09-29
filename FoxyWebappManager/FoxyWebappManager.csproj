@@ -17,6 +17,9 @@
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <WindowsPackageType>None</WindowsPackageType>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Assets\UserChrome\userChrome.txt" />
+  </ItemGroup>
 	<ItemGroup>
 		<COMReference Include="IWshRuntimeLibrary">
 			<WrapperTool>tlbimp</WrapperTool>

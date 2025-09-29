@@ -16,8 +16,14 @@ namespace FoxyWebappManager.Services
                 .GetWindowsLnk(url);
 
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var name = Path.Combine(desktop, url.GetDomainName()); 
+            var name = Path.Combine(desktop, url.GetDomainNameWithoutExtension()); 
             Helpers.IOHelper.CreateShortcut(name ,firfoxPath, args, iconPath);
+
+        }
+
+
+        public void AcitvateChromeStyle(FireFoxProfile profile, bool activate)
+        {
 
         }
 

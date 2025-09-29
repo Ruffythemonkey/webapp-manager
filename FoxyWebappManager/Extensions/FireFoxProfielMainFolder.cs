@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using FoxyWebappManager.Models;
-using Microsoft.Extensions.Hosting;
 
 namespace FoxyWebappManager.Extensions
 {
@@ -43,7 +42,7 @@ namespace FoxyWebappManager.Extensions
                 {
                     startUrl = url.ToString(),
                     scopes = { new Scope() { hostname = url.DnsSafeHost } },
-                    shortcutRelativePath = $@"Firefox Web-Apps\{url.GetDomainName()}.lnk",
+                    shortcutRelativePath = $@"Firefox Web-Apps\{url.GetDomainNameWithoutExtension()}.lnk",
                     userContextId = 0
                 });
             }
@@ -54,6 +53,8 @@ namespace FoxyWebappManager.Extensions
 
             return folder;
         }
+
+      
 
         //"C:\Program Files\Mozilla Firefox\firefox.exe" "-taskbar-tab" "157d7a5a-0b62-46ab-9f6d-1ec65c3e3994" "-new-window" "https://www.amazon.de" "-profile" "C:\Users\serap\AppData\Roaming\Mozilla\Firefox\Profiles\utei7iz0.Streaming" "-container" "0"
 
@@ -72,16 +73,7 @@ namespace FoxyWebappManager.Extensions
 
         }
 
-        public static string GetDomainName(this Uri uri)
-        {
-            return uri
-                .DnsSafeHost
-                .Split('.')
-                .AsEnumerable()
-                .Reverse()
-                .Skip(1)
-                .First();
-        }
+
 
     }
 

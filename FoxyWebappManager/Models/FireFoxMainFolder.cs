@@ -1,8 +1,4 @@
-﻿
-
-using Windows.Web.Syndication;
-
-namespace FoxyWebappManager.Models
+﻿namespace FoxyWebappManager.Models
 {
     public class FireFoxMainFolder
     {

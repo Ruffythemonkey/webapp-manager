@@ -1,11 +1,17 @@
-﻿namespace FoxyWebappManager.Helpers
+﻿using FoxyWebappManager.Extensions;
+
+namespace FoxyWebappManager.Helpers
 {
     public static class FavIconHelper
     {
         public static async Task<string> IconLoadAsync(Uri uri)
         {
-            var iconname = uri.DnsSafeHost.ToLower();
-            var file = LocalAppDataPath.LocalDataFile("cache/" + iconname.Replace(".", "-") + ".ico");
+            var iconname = $"{uri.Scheme}://{uri.DnsSafeHost}";
+     
+            var file = LocalAppDataPath.LocalDataFile("cache/" + iconname
+                .GetHashCode()
+                .ToString()
+                .Replace("-","") + ".ico");
 
             if (File.Exists(file))
             {
@@ -15,6 +21,10 @@
             using (var cli = new HttpClient())
             {
                 var request = await cli.GetAsync($"https://www.google.com/s2/favicons?domain={iconname}&sz=64");
+                if (!request.IsSuccessStatusCode && uri.DomainHasSubLevelDomain())
+                {
+                    request = await cli.GetAsync($"https://www.google.com/s2/favicons?domain={uri.GetTopLevelDomain()}&sz=64");
+                }
                 request.EnsureSuccessStatusCode();
 
                 var content = await request.Content.ReadAsByteArrayAsync();
