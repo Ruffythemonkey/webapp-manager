@@ -33,6 +33,9 @@ public partial class MainViewModel(FireFoxEditService fireFoxEditService) : Obse
     [ObservableProperty]
     public partial string FireFoxPath { get; set; } = Extensions.FireFoxPathExtension.GetSavedFireFoxData().Path;
 
+    [ObservableProperty]
+    public partial bool IsCustomizeUserStyle { get; set; }
+
     partial void OnHostnameChanged(string value)
     {
         _ = GetFavIcon(value);
@@ -46,6 +49,20 @@ public partial class MainViewModel(FireFoxEditService fireFoxEditService) : Obse
         }
     }
 
+    partial void OnProfielsChanged(List<FireFoxProfile> value)
+    {
+        if (value.Any())
+        {
+            SelectedProfiel = Profiels.First();
+            
+        }
+    }
+
+    partial void OnSelectedProfielChanged(FireFoxProfile value)
+    {
+       IsCustomizeUserStyle = new FireFoxCssHelper(SelectedProfiel).IsUserChromeActive;
+    }
+    
     private async Task GetFavIcon(string v)
     {
         try
@@ -83,14 +100,6 @@ public partial class MainViewModel(FireFoxEditService fireFoxEditService) : Obse
         }
     }
 
-    partial void OnProfielsChanged(List<FireFoxProfile> value)
-    {
-        if (value.Any())
-        {
-            SelectedProfiel = Profiels.First();
-        }
-    }
-
     [RelayCommand(CanExecute = nameof(CanSaveExecute))]
     private void Save() =>
         fireFoxEditService.CreateWebApp(SelectedProfiel, new Uri(Hostname), FireFoxPath, FavIcon);
@@ -111,6 +120,10 @@ public partial class MainViewModel(FireFoxEditService fireFoxEditService) : Obse
             Extensions.FireFoxPathExtension.Save(new() { Path = file.Path });
         }
     }
+
+    [RelayCommand]
+    private void SwitchUserChrome(bool activate) =>
+        new FireFoxCssHelper(SelectedProfiel).ActivateUserChrome(activate);
 
     private string DefaultFavIcon
     {

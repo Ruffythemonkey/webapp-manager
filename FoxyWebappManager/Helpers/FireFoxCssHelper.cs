@@ -56,12 +56,12 @@ namespace FoxyWebappManager.Helpers
                     return false;
 
                 var fr = File.ReadAllText(UserChromeFile);
-   
-                var test = _ChromeSettings
-                    .Where(x=> fr.Contains(x, StringComparison.InvariantCultureIgnoreCase))
-                    .Count();
 
-                return _ChromeSettings.Count == test;
+                var test = _ChromeSettings
+                    .Where(x => fr.Contains(x))
+                    .ToList();
+
+                return _ChromeSettings.Count == test.Count;
             }
         }
 
@@ -98,7 +98,8 @@ namespace FoxyWebappManager.Helpers
             if (!UserChromeFileExist)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(UserChromeFile)!);
-                File.Create(UserChromeFile);
+                var fc = File.Create(UserChromeFile);
+                fc.Close();
             }
         }
 
@@ -118,11 +119,10 @@ namespace FoxyWebappManager.Helpers
 
         private string RemoveSettings()
         {
-
             var fr = File.ReadAllText(UserChromeFile);
             foreach (var item in _ChromeSettings)
             {
-                fr.Replace(item, "");
+               fr = fr.Replace(item, "");
             }
             File.WriteAllText(UserChromeFile, fr);
             return fr;

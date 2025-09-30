@@ -52,7 +52,18 @@
                     Source="{x:Bind ViewModel.FavIcon, Mode=OneWay}" />
                 <Button Content="Use other Icon" />
             </StackPanel>
-            <CheckBox Content="Enhanced WebApp Style Chrome like (without Navbar)" />
+            <CheckBox
+                x:Name="userChrome"
+                Content="Enhanced WebApp Style Chrome like (without Navbar)"
+                IsChecked="{x:Bind ViewModel.IsCustomizeUserStyle, Mode=TwoWay}">
+                <a:Interaction.Behaviors>
+                    <a:EventTriggerBehavior EventName="Click">
+                        <a:InvokeCommandAction
+                            Command="{x:Bind ViewModel.SwitchUserChromeCommand}"
+                            CommandParameter="{x:Bind userChrome.IsChecked, Mode=OneWay}" />
+                    </a:EventTriggerBehavior>
+                </a:Interaction.Behaviors>
+            </CheckBox>
             <Button
                 Command="{x:Bind ViewModel.SaveCommand}"
                 Content="Save To Desktop" />

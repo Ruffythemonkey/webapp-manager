@@ -3,7 +3,7 @@ using FoxyWebappManager.Models;
 
 namespace FoxyWebappManager.Extensions
 {
-    public static class FireFoxProfielMainFolder
+    public static class FireFoxMainFolderExtension
     {
         public static FireFoxMainFolder GetMainFolder(this FireFoxProfile profile)
         {
@@ -24,13 +24,14 @@ namespace FoxyWebappManager.Extensions
         }
 
         public static void CreateTaskbarFolder(this FireFoxMainFolder folder)
-            => Directory.CreateDirectory(folder.TaskBarFolder);
+            => Directory.CreateDirectory(folder.IconFolder); //Icon Folder ist ein SubDirectory und somit wird auch automatisch der Taskbarfolder kreiert
 
-        public static FireFoxMainFolder SetJson(this FireFoxMainFolder folder, Uri url)
+        public static (FireFoxMainFolder mainFolder, FireFoxTaskBarJson taskBarJson)
+            SetJson(this FireFoxMainFolder folder, Uri url)
         {
             folder.CreateTaskbarFolder();
             var json = folder.GetJson();
-            
+
             var hostexist = json
                .taskbarTabs
                .Where(x => x.scopes.Any(s => s.hostname == url.DnsSafeHost))
@@ -51,14 +52,10 @@ namespace FoxyWebappManager.Extensions
             var jstring = JsonSerializer.Serialize(json);
             File.WriteAllText(folder.JsonFile, jstring);
 
-            return folder;
+            return (folder, json);
         }
 
-      
-
-        //"C:\Program Files\Mozilla Firefox\firefox.exe" "-taskbar-tab" "157d7a5a-0b62-46ab-9f6d-1ec65c3e3994" "-new-window" "https://www.amazon.de" "-profile" "C:\Users\serap\AppData\Roaming\Mozilla\Firefox\Profiles\utei7iz0.Streaming" "-container" "0"
-
-        public static string GetWindowsLnk(this FireFoxMainFolder folder,Uri uri)
+        public static string GetWindowsLnkArguments(this FireFoxMainFolder folder, Uri uri)
         {
             var data = GetJson(folder)
                 .taskbarTabs
@@ -73,6 +70,25 @@ namespace FoxyWebappManager.Extensions
 
         }
 
+        /// <summary>
+        /// CopyIcon from Temp to FireFox relevat IconFolder with ID Name
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="sourceIcon"></param>
+        /// <param name="sourceUrl"></param>
+        /// <returns>FireFox Icon Path</returns>
+        public static string CopyIcon(this (FireFoxMainFolder mainFolder, FireFoxTaskBarJson taskBarJson) data, string sourceIcon, Uri sourceUrl)
+        {
+            var name = data
+                .taskBarJson
+                .taskbarTabs
+                .First(x => x.startUrl == sourceUrl.ToString())
+                .id;
+            name = $"{name}.ico";
+            name = Path.Combine(data.mainFolder.IconFolder, name);
+            File.Copy(sourceIcon, name, true);
+            return name;
+        }
 
 
     }
