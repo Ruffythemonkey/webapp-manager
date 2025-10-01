@@ -1,8 +1,10 @@
 # Webapp-Manager 🐧
-Webapp Manager Inspired by Mint Webapp-manager
 
-![alt text](https://i.ibb.co/rcwRN39/Screenshot-2024-12-13-161747.png)
+![alt text](https://i.ibb.co/gb67Z0yt/Screenshot-2025-10-01-164222.png)
 
+> When you activate Web App Style Chrome like, then you have no Navbar
+![alt text](https://i.ibb.co/XfhNrvKV/Screenshot-2025-10-01-164320.png)
 
 > [!NOTE]
-> Only for Firefox.
+> Only for Firefox > 143.0.1.
+
