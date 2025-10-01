@@ -15,7 +15,7 @@ namespace FoxyWebappManager.Helpers
             link.SetArguments(arguments);
             link.SetWorkingDirectory(Path.GetDirectoryName(targetExe)!);
             link.SetIconLocation(iconLocation, 0);
-            link.SetDescription("Meine WebApp - " + Path.GetFileNameWithoutExtension(shortcutPath));
+            link.SetDescription($"{Path.GetFileNameWithoutExtension(shortcutPath)} Web-App");
 
             // PropertyStore (AppUserModelID) setzen
             IPropertyStore propStore = (IPropertyStore)link;

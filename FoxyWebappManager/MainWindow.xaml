@@ -6,8 +6,11 @@
     xmlns:local="using:FoxyWebappManager"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:windowex="using:WinUIEx"
-    MinWidth="500"
-    MinHeight="500"
+    Width="600"
+    Height="600"
+    IsMaximizable="False"
+    
+    IsResizable="False"
     PersistenceId="MainWindow"
     mc:Ignorable="d">
     <Window.SystemBackdrop>

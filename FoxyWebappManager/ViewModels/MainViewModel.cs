@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FoxyWebappManager.Contracts.ViewModels;
 using FoxyWebappManager.Helpers;
@@ -101,8 +102,24 @@ public partial class MainViewModel(FireFoxEditService fireFoxEditService) : Obse
     }
 
     [RelayCommand(CanExecute = nameof(CanSaveExecute))]
-    private void Save() =>
-        fireFoxEditService.CreateWebApp(SelectedProfiel, new Uri(Hostname), FireFoxPath, FavIcon);
+    private async Task Save() =>
+        await fireFoxEditService.CreateWebApp(SelectedProfiel, new Uri(Hostname), FireFoxPath, FavIcon);
+
+    [RelayCommand]
+    private async Task OpenDialogIcon()
+    {
+        var openPicker = new FileOpenPicker();
+        var window = App.MainWindow;
+        var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+        WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hWnd);
+        openPicker.ViewMode = PickerViewMode.Thumbnail;
+        openPicker.FileTypeFilter.Add(".ico");
+        var file = await openPicker.PickSingleFileAsync();
+        if (file != null)
+        {
+            FavIcon = file.Path;
+        }
+    }
 
     [RelayCommand]
     private async Task OpenDialogFireFox()

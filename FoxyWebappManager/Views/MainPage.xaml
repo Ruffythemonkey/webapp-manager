@@ -50,7 +50,9 @@
                     Width="64"
                     Height="64"
                     Source="{x:Bind ViewModel.FavIcon, Mode=OneWay}" />
-                <Button Content="Use other Icon" />
+                <Button
+                    Command="{x:Bind ViewModel.OpenDialogIconCommand}"
+                    Content="Use other Icon" />
             </StackPanel>
             <CheckBox
                 x:Name="userChrome"
@@ -66,8 +68,14 @@
             </CheckBox>
             <Button
                 Command="{x:Bind ViewModel.SaveCommand}"
-                Content="Save To Desktop" />
+                Content="Save To Startmenu" />
         </StackPanel>
+        <TextBlock
+            Margin="10"
+            VerticalAlignment="Bottom">
+            <Run Text="You can find this Project under" />
+            <Hyperlink NavigateUri="https://github.com/Ruffythemonkey/webapp-manager">github</Hyperlink>
+        </TextBlock>
 
     </Grid>
 </Page>
