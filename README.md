@@ -1,4 +1,4 @@
-# Webapp-Manager 🐧
+# FoxyWebapp-Manager 🦊
 
 ![alt text](https://i.ibb.co/gb67Z0yt/Screenshot-2025-10-01-164222.png)
 
