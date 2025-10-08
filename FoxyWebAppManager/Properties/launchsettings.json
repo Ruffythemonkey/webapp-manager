@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "FoxyWebAppManager (Unpackaged)": {
+        "commandName": "Project"
+      },
+      "FoxyWebAppManager (Package)": {
+        "commandName": "MsixPackage"
+      }
+    }
+}
