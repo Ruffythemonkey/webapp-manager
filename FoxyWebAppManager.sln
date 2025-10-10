@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxyWebAppManager", "FoxyWebAppManager\FoxyWebAppManager.csproj", "{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedIO", "SharedIO\SharedIO.shproj", "{2647085C-2545-49D6-913E-E7815234E071}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,5 +25,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A63DBCD2-55BA-488E-99FE-2CACA12CA528}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedIO\SharedIO.projitems*{2647085c-2545-49d6-913e-e7815234e071}*SharedItemsImports = 13
+		SharedIO\SharedIO.projitems*{bc0912c0-1840-cfc5-83d4-31ea4381e5bf}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

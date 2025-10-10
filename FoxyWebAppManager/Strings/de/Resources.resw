@@ -124,22 +124,22 @@
     <value>FoxyWebAppManager</value>
   </data>
   <data name="Shell_Main.Content" xml:space="preserve">
-    <value>Profiles</value>
+    <value>Profile</value>
   </data>
   <data name="FirefoxPath.Header" xml:space="preserve">
-    <value>Firefox Path</value>
+    <value>Firefox Pfad</value>
   </data>
   <data name="FireFoxProfile.Header" xml:space="preserve">
-    <value>Firefox Profiles</value>
+    <value>Firefox Profile</value>
   </data>
   <data name="OtherIcon.Content" xml:space="preserve">
-    <value>Use other Icon</value>
+    <value>benutze eigenes Icon</value>
   </data>
   <data name="UseChrome.Content" xml:space="preserve">
-    <value>Enhanced Web App Style Chrome like (without Navbar)</value>
+    <value>Verbesserter Web-App-Stil, ähnlich wie Chrome (ohne Navigationsleiste)</value>
   </data>
   <data name="Save.Content" xml:space="preserve">
-    <value>Save to Startmenu</value>
+    <value>Speichern ins Startmenü</value>
   </data>
   <data name="Host.Header" xml:space="preserve">
     <value>Host Url (Web-App)</value>
