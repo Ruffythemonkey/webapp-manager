@@ -50,7 +50,7 @@ namespace FoxyWebAppManager.Extensions
             }
             else { hostexist.startUrl = url.ToString(); }
 
-            var jstring = JsonSerializer.Serialize(json,typeof(FireFoxTaskbarJson),FireFoxTaskbarJsonContext.Default);
+            var jstring = JsonSerializer.Serialize(json,FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson);
             File.WriteAllText(folder.JsonFile, jstring);
 
             return (folder, json);

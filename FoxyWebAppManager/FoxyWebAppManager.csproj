@@ -16,6 +16,8 @@
     <EnableMsixTooling>true</EnableMsixTooling>
 	<WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>true</WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>
     <WindowsPackageType>None</WindowsPackageType>
+	<EnableTrimAnalyzer>false</EnableTrimAnalyzer>
+	<TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +34,14 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.250916003" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.0" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.9" />
+    <PackageReference Include="TLDExtractor" Version="1.0.0" />
     <PackageReference Include="WinUIEx" Version="2.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Assets\WindowIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

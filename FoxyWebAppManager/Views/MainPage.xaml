@@ -2,6 +2,7 @@
     x:Class="FoxyWebAppManager.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:a="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviros="using:FoxyWebAppManager.Behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,12 +16,40 @@
             Spacing="12">
             <AutoSuggestBox
                 x:Uid="FirefoxPath"
-                QueryIcon="Folder" />
+                QueryIcon="Folder"
+                Text="{x:Bind ViewModel.FireFoxData.Path, Mode=OneWay}">
+                <a:Interaction.Behaviors>
+                    <a:EventTriggerBehavior EventName="QuerySubmitted">
+                        <a:InvokeCommandAction Command="{x:Bind ViewModel.OpenFireFoxPathCommand}" />
+                    </a:EventTriggerBehavior>
+                </a:Interaction.Behaviors>
+            </AutoSuggestBox>
             <ComboBox
                 x:Uid="FireFoxProfile"
-                HorizontalAlignment="Stretch" />
+                HorizontalAlignment="Stretch"
+                ItemsSource="{x:Bind ViewModel.FoxProfiles, Mode=OneWay}"
+                SelectedItem="{x:Bind ViewModel.SelectedFireFoxProfile, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate
+                        xmlns:t="using:FoxyWebAppManager.Models"
+                        x:DataType="t:FireFoxProfile">
+                        <TextBlock Text="{x:Bind Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBox x:Uid="Host" />
-            <Button x:Uid="OtherIcon" />
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="12">
+                <Image
+                    Width="64"
+                    Height="64"
+                    Source="{x:Bind ViewModel.FavIcon, Mode=OneWay}" />
+                <Button
+                    x:Uid="OtherIcon"
+                    Command="{x:Bind ViewModel.OpenFavIconFromPathCommand}" />
+            </StackPanel> <!--FavIcon-->
+
             <CheckBox x:Uid="UseChrome" />
             <Button x:Uid="Save" />
         </StackPanel>

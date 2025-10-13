@@ -1,7 +1,7 @@
 ﻿using FoxyWebAppManager.Extensions;
 using FoxyWebAppManager.Models;
 
-namespace FoxyWebappManager.Helpers
+namespace FoxyWebAppManager.Helpers
 {
     public class FireFoxCssHelper(FireFoxProfile profile)
     {

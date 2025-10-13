@@ -27,7 +27,7 @@ namespace FoxyWebAppManager.Extensions
 
         public static void Save(this FireFoxData data)
         {
-            var s = JsonSerializer.Serialize(data, typeof(FireFoxData), FireFoxDataJsonContext.Default);
+            var s = JsonSerializer.Serialize(data,FireFoxDataJsonContext.Default.FireFoxData);
             File.WriteAllText(dataPath, s);
         }
     }

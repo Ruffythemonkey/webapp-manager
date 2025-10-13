@@ -5,22 +5,10 @@
         extension(Uri uri)
         {
             public string GetDomainNameWithoutExtension()
-            {
-                return uri
-                    .DnsSafeHost
-                    .Split('.')
-                    .AsEnumerable()
-                    .Reverse()
-                    .Skip(1)
-                    .First();
-            }
+                => TLDExtractor.TLDExtractor.Extract(uri).Domain;
 
             public string GetTopLevelDomain()
-            {
-                var domainName = uri.GetDomainNameWithoutExtension();
-                var root = uri.DnsSafeHost.Split(".").Last();
-                return $"{uri.Scheme}://{domainName}.{root}";
-            }
+                => $"{uri.Scheme}://{TLDExtractor.TLDExtractor.Extract(uri).EffectiveDomain}";
 
             public bool DomainHasSubLevelDomain()
                 => uri.DnsSafeHost.Split(".").Count() > 1;
