@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using FoxyWebAppManager.Models;
 using FoxyWebAppManager.Extensions;
-using System.Collections.ObjectModel;
 using static FoxyWebAppManager.Helpers.FireFoxIniParser;
 
 
@@ -10,6 +9,11 @@ namespace FoxyWebAppManager.ViewModels;
 
 public partial class MainViewModel : BaseViewModel
 {
+
+    private bool CanWebAppSaveExecute => IsValidHost && File.Exists(FireFoxData.Path);
+
+    [ObservableProperty]
+    public partial bool IsValidHost { get; set; }
 
     [ObservableProperty]
     public partial List<FireFoxProfile> FoxProfiles { get; set; }
@@ -23,12 +27,23 @@ public partial class MainViewModel : BaseViewModel
     [ObservableProperty]
     public partial FireFoxData FireFoxData { get; set; } = FireFoxPathExtensions.GetSavedFireFoxData();
 
+    [ObservableProperty]
+    public partial string WebHost { get; set; }
 
     [RelayCommand]
     private async Task OpenFireFoxPath() => await this.OpenFireFoxPathEx();
 
     [RelayCommand]
     private async Task OpenFavIconFromPath() => await this.OpenIconPathEx();
+
+    [RelayCommand(CanExecute = nameof(CanWebAppSaveExecute))]
+    private void SaveWebApp()
+    {
+
+    }
+
+    partial void OnWebHostChanged(string value)
+      => _ = this.ChangeFavIconByWebHostChanged();
 
     public override void OnNavigatedFrom()
     {

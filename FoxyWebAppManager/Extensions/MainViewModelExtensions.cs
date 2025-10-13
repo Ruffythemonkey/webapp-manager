@@ -1,12 +1,14 @@
-﻿using FoxyWebAppManager.Models;
+﻿using FoxyWebAppManager.Helpers;
+using FoxyWebAppManager.Models;
 using FoxyWebAppManager.ViewModels;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
 
 namespace FoxyWebAppManager.Extensions
 {
     public static class MainViewModelExtensions
     {
-        extension(MainViewModel viewModel) 
+        extension(MainViewModel viewModel)
         {
             /// <summary>
             /// Open New FF Path and save it in a json in LocalAppFolder
@@ -43,6 +45,53 @@ namespace FoxyWebAppManager.Extensions
                 }
             }
 
+            public async Task ChangeFavIconByWebHostChanged()
+            {
+                try
+                {
+                    var url = viewModel.WebHost;
+                    if (url.IsUrl() && await url.IsDnsResolvableUrlAsync())
+                    {
+                        var loadedFavIcon = await FavIconHelper.IconLoadAsync(new Uri(url));
+
+                        viewModel._dispatcherQueue.TryEnqueue(() =>
+                        {
+                            viewModel.IsValidHost = true;
+                            viewModel.FavIcon = loadedFavIcon;
+                        });
+                    }
+                    else
+                    {
+                        viewModel._dispatcherQueue.TryEnqueue(() =>
+                        {
+                            viewModel.IsValidHost = false;
+                            viewModel.FavIcon = viewModel.DefaultFavIcon;
+                        });
+                    }
+
+
+                }
+                catch (Exception)
+                {
+
+                    viewModel._dispatcherQueue.TryEnqueue(() =>
+                    {
+                        viewModel.IsValidHost = false;
+                        viewModel.FavIcon = viewModel.DefaultFavIcon;
+                    });
+                }
+                finally
+                {
+                    viewModel._dispatcherQueue.TryEnqueue(() 
+                        => viewModel.SaveWebAppCommand.NotifyCanExecuteChanged());
+                }
+
+            }
+
+            public string DefaultFavIcon
+            {
+                get => Path.Combine(AppContext.BaseDirectory, "/Assets/WindowIcon.ico");
+            }
 
         }
     }

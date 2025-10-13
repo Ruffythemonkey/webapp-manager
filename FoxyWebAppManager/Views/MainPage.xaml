@@ -37,7 +37,9 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox x:Uid="Host" />
+            <TextBox
+                x:Uid="Host"
+                Text="{x:Bind ViewModel.WebHost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <StackPanel
                 Orientation="Horizontal"
                 Spacing="12">
@@ -48,10 +50,13 @@
                 <Button
                     x:Uid="OtherIcon"
                     Command="{x:Bind ViewModel.OpenFavIconFromPathCommand}" />
-            </StackPanel> <!--FavIcon-->
+            </StackPanel>
+            <!--  FavIcon  -->
 
             <CheckBox x:Uid="UseChrome" />
-            <Button x:Uid="Save" />
+            <Button
+                x:Uid="Save"
+                Command="{x:Bind ViewModel.SaveWebAppCommand}" />
         </StackPanel>
 
 
