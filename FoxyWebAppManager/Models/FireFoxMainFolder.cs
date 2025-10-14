@@ -14,7 +14,7 @@
             get => Path.Combine(ProfielPath, "taskbartabs");
         }
 
-        public bool IsTasbarTabsExist
+        public bool IsTaskbarTabsJsonExist
         {
             get => File.Exists(JsonFile);
         }

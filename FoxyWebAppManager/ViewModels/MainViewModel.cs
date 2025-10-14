@@ -37,10 +37,7 @@ public partial class MainViewModel : BaseViewModel
     private async Task OpenFavIconFromPath() => await this.OpenIconPathEx();
 
     [RelayCommand(CanExecute = nameof(CanWebAppSaveExecute))]
-    private void SaveWebApp()
-    {
-
-    }
+    private async Task SaveWebApp() => await SelectedFireFoxProfile.CreateWebApp(new Uri(WebHost), FireFoxData.Path, FavIcon);
 
     partial void OnWebHostChanged(string value)
       => _ = this.ChangeFavIconByWebHostChanged();
@@ -60,4 +57,5 @@ public partial class MainViewModel : BaseViewModel
             SelectedFireFoxProfile = value.First();
         }
     }
+
 }

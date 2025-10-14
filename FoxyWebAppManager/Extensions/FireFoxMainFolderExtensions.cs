@@ -5,21 +5,14 @@ namespace FoxyWebAppManager.Extensions
 {
     public static class FireFoxMainFolderExtension
     {
-        public static FireFoxMainFolder GetMainFolder(this FireFoxProfile profile)
-        {
-            var _appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var _standarfolder = Path.Combine(_appdata, "Mozilla/Firefox");
 
-            return new FireFoxMainFolder(
-                profile.IsRelative ? Path.Combine(_standarfolder, profile.Path) : profile.Path);
-        }
-       
+
         public static FireFoxTaskbarJson GetJson(this FireFoxMainFolder folder)
         {
-            if (folder.IsTasbarTabsExist)
+            if (folder.IsTaskbarTabsJsonExist)
             {
-                return JsonSerializer.Deserialize<FireFoxTaskbarJson>(File.ReadAllText(folder.JsonFile),FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson) 
-                    ?? throw new FileNotFoundException();
+                return JsonSerializer.Deserialize<FireFoxTaskbarJson>(File.ReadAllText(folder.JsonFile), FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson)
+                    ?? throw new FormatException();
             }
             return new FireFoxTaskbarJson();
         }
@@ -27,7 +20,7 @@ namespace FoxyWebAppManager.Extensions
         public static void CreateTaskbarFolder(this FireFoxMainFolder folder)
             => Directory.CreateDirectory(folder.IconFolder); //Icon Folder ist ein SubDirectory und somit wird auch automatisch der Taskbarfolder kreiert
 
-        public static (FireFoxMainFolder mainFolder, FireFoxTaskbarJson taskBarJson)
+        public static (FireFoxMainFolder mainFolder, TaskbarTab taskbarTab)
             SetJson(this FireFoxMainFolder folder, Uri url)
         {
             folder.CreateTaskbarFolder();
@@ -40,36 +33,26 @@ namespace FoxyWebAppManager.Extensions
 
             if (hostexist is null)
             {
-                json.taskbarTabs.Add(new()
+                hostexist = new TaskbarTab()
                 {
                     startUrl = url.ToString(),
                     scopes = { new Scope() { hostname = url.DnsSafeHost } },
                     shortcutRelativePath = $@"Firefox Web-Apps\{url.GetDomainNameWithoutExtension()}.lnk",
                     userContextId = 0
-                });
+                };
+                json.taskbarTabs.Add(hostexist);
             }
             else { hostexist.startUrl = url.ToString(); }
 
-            var jstring = JsonSerializer.Serialize(json,FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson);
+            var jstring = JsonSerializer.Serialize(json, FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson);
             File.WriteAllText(folder.JsonFile, jstring);
 
-            return (folder, json);
+            return (folder, hostexist);
         }
 
-        public static string GetWindowsLnkArguments(this FireFoxMainFolder folder, Uri uri)
-        {
-            var data = GetJson(folder)
-                .taskbarTabs
-                .Where(x => x.startUrl == uri.ToString())
-                .FirstOrDefault();
-            if (data is null)
-            {
-                throw new ArgumentNullException("url not found");
-            }
+        public static string GetWindowsLnkArguments(this (FireFoxMainFolder folder,TaskbarTab taskbarTab) data, Uri uri)
+           => $"\"-taskbar-tab\" \"{data.taskbarTab.id}\" \"-new-window\" \"{uri.Scheme}://{uri.DnsSafeHost}\" \"-profile\" \"{data.folder.ProfielPath}\" \"-container\" \"0\"";
 
-            return $"\"-taskbar-tab\" \"{data.id}\" \"-new-window\" \"{uri.Scheme}://{uri.DnsSafeHost}\" \"-profile\" \"{folder.ProfielPath}\" \"-container\" \"0\" ";
-
-        }
 
         /// <summary>
         /// CopyIcon from Temp to FireFox relevat IconFolder with ID Name
@@ -78,17 +61,11 @@ namespace FoxyWebAppManager.Extensions
         /// <param name="sourceIcon"></param>
         /// <param name="sourceUrl"></param>
         /// <returns>FireFox Icon Path</returns>
-        public static string CopyIcon(this (FireFoxMainFolder mainFolder, FireFoxTaskbarJson taskBarJson) data, string sourceIcon, Uri sourceUrl)
+        public static string CopyIcon(this (FireFoxMainFolder mainFolder, TaskbarTab taskbarTab) data, string sourceIcon)
         {
-            var name = data
-                .taskBarJson
-                .taskbarTabs
-                .First(x => x.startUrl == sourceUrl.ToString())
-                .id;
-            name = $"{name}.ico";
-            name = Path.Combine(data.mainFolder.IconFolder, name);
-            File.Copy(sourceIcon, name, true);
-            return name;
+            var destinationIcon = Path.Combine(data.mainFolder.IconFolder, $"{data.taskbarTab.id}.ico");
+            File.Move(sourceIcon, destinationIcon, true);
+            return destinationIcon;
         }
 
 

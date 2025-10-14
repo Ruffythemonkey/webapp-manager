@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxyWebAppManager", "FoxyWe
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedIO", "SharedIO\SharedIO.shproj", "{2647085C-2545-49D6-913E-E7815234E071}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shortcut", "Shortcut\Shortcut.csproj", "{AAFC954F-E7A3-487E-A811-0A0B87B2A927}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -19,6 +21,10 @@ Global
 		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x64.ActiveCfg = Release|x64
 		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x64.Build.0 = Release|x64
 		{BC0912C0-1840-CFC5-83D4-31EA4381E5BF}.Release|x64.Deploy.0 = Release|x64
+		{AAFC954F-E7A3-487E-A811-0A0B87B2A927}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AAFC954F-E7A3-487E-A811-0A0B87B2A927}.Debug|x64.Build.0 = Debug|Any CPU
+		{AAFC954F-E7A3-487E-A811-0A0B87B2A927}.Release|x64.ActiveCfg = Release|Any CPU
+		{AAFC954F-E7A3-487E-A811-0A0B87B2A927}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
