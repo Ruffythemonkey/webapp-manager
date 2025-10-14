@@ -53,7 +53,18 @@
             </StackPanel>
             <!--  FavIcon  -->
 
-            <CheckBox x:Uid="UseChrome" />
+            <CheckBox
+                x:Name="userChrome"
+                x:Uid="UseChrome"
+                IsChecked="{x:Bind ViewModel.IsCustomizeUserStyle, Mode=TwoWay}">
+                <a:Interaction.Behaviors>
+                    <a:EventTriggerBehavior EventName="Click">
+                        <a:InvokeCommandAction
+                            Command="{x:Bind ViewModel.SwitchUserChromeCommand}"
+                            CommandParameter="{x:Bind userChrome.IsChecked, Mode=OneWay}" />
+                    </a:EventTriggerBehavior>
+                </a:Interaction.Behaviors>
+            </CheckBox>
             <Button
                 x:Uid="Save"
                 Command="{x:Bind ViewModel.SaveWebAppCommand}" />

@@ -8,5 +8,19 @@
     behaviors:NavigationViewHeaderBehavior.HeaderMode="Never"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea" />
+    <Grid x:Name="ContentArea" ColumnSpacing="12" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Spacing="12">
+            <ComboBox HorizontalAlignment="Stretch" Header="Profiels"/>
+        </StackPanel>
+
+        <StackPanel Spacing="12" Grid.Column="1">
+            <TextBox Header="Url"/>
+        </StackPanel>
+        
+    </Grid>
 </Page>

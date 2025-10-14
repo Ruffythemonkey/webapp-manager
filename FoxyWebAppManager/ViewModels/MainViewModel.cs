@@ -1,7 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using FoxyWebAppManager.Models;
 using FoxyWebAppManager.Extensions;
+using FoxyWebAppManager.Helpers;
+using FoxyWebAppManager.Models;
 using static FoxyWebAppManager.Helpers.FireFoxIniParser;
 
 
@@ -30,6 +31,9 @@ public partial class MainViewModel : BaseViewModel
     [ObservableProperty]
     public partial string WebHost { get; set; }
 
+    [ObservableProperty]
+    public partial bool IsCustomizeUserStyle { get; set; }
+
     [RelayCommand]
     private async Task OpenFireFoxPath() => await this.OpenFireFoxPathEx();
 
@@ -38,6 +42,10 @@ public partial class MainViewModel : BaseViewModel
 
     [RelayCommand(CanExecute = nameof(CanWebAppSaveExecute))]
     private async Task SaveWebApp() => await SelectedFireFoxProfile.CreateWebApp(new Uri(WebHost), FireFoxData.Path, FavIcon);
+
+    [RelayCommand]
+    private void SwitchUserChrome(bool activate) =>
+    new FireFoxCssHelper(SelectedFireFoxProfile).ActivateUserChrome(activate);
 
     partial void OnWebHostChanged(string value)
       => _ = this.ChangeFavIconByWebHostChanged();
@@ -49,6 +57,9 @@ public partial class MainViewModel : BaseViewModel
 
     public override void OnNavigatedTo(object parameter)
         => FoxProfiles = IniReaderFireFox.LoadProfilesFromInstalledFF();
+
+    partial void OnSelectedFireFoxProfileChanged(FireFoxProfile value) 
+        => IsCustomizeUserStyle = new FireFoxCssHelper(SelectedFireFoxProfile).IsUserChromeActive;
 
     partial void OnFoxProfilesChanged(List<FireFoxProfile> value)
     {

@@ -50,7 +50,7 @@ namespace FoxyWebAppManager.Extensions
             return (folder, hostexist);
         }
 
-        public static string GetWindowsLnkArguments(this (FireFoxMainFolder folder,TaskbarTab taskbarTab) data, Uri uri)
+        public static string GetWindowsLnkArguments(this (FireFoxMainFolder folder, TaskbarTab taskbarTab) data, Uri uri)
            => $"\"-taskbar-tab\" \"{data.taskbarTab.id}\" \"-new-window\" \"{uri.Scheme}://{uri.DnsSafeHost}\" \"-profile\" \"{data.folder.ProfielPath}\" \"-container\" \"0\"";
 
 
@@ -63,12 +63,29 @@ namespace FoxyWebAppManager.Extensions
         /// <returns>FireFox Icon Path</returns>
         public static string CopyIcon(this (FireFoxMainFolder mainFolder, TaskbarTab taskbarTab) data, string sourceIcon)
         {
+            //check Icons and convert it when .png, .jpeg, .jpg
+            sourceIcon = TryConvertIcon(sourceIcon);
+
             var destinationIcon = Path.Combine(data.mainFolder.IconFolder, $"{data.taskbarTab.id}.ico");
             File.Move(sourceIcon, destinationIcon, true);
             return destinationIcon;
         }
 
+        private static string TryConvertIcon(string sourceIcon)
+        {
+            var ext = Path.GetExtension(sourceIcon).ToLower();
 
+            if (ext != ".ico")
+            {
+                var name = Path.GetFileNameWithoutExtension(sourceIcon);
+                var tmpFullName = Path.Combine(Path.GetTempPath(), $"{name}.ico");
+                var iconConvert = Helpers.ImageToIconConverterHelper.ConvertToIcon(sourceIcon, tmpFullName, 64);
+                
+                return iconConvert ? tmpFullName : throw new BadImageFormatException();
+
+            }
+            return sourceIcon;
+        }
     }
 
 

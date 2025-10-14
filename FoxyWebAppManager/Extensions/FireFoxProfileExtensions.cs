@@ -31,12 +31,6 @@ namespace FoxyWebAppManager.Extensions
                 var destPath = Path.Combine(startmenu, setJson.taskbarTab.shortcutRelativePath);
 
                 Shortcut.Shortcut.CreateShortcutWithAppId(destPath, firfoxPath, args, iconPath, setJson.taskbarTab.id);
-
-                //Shortcut.CreateShortcutWithAppId(destPath, firfoxPath, args, iconPath, setJson.taskbarTab.id);
-
-                //Helpers
-                //    .ShellShortcutHelper
-                //    .CreateShortcutWithAppId(destPath, firfoxPath, args, iconPath, setJson.taskbarTab.id);
             }
 
         }
