@@ -12,6 +12,10 @@ namespace FoxyWebAppManager.Models
     public class FireFoxTaskbarJson
     {
         public int version { get; set; } = 1;
+
+        /// <summary>
+        /// Representet Web-Apps
+        /// </summary>
         public List<TaskbarTab> taskbarTabs { get; set; } = [];
     }
 

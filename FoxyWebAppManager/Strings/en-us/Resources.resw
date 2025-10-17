@@ -147,4 +147,10 @@
   <data name="Shell_Apps.Content" xml:space="preserve">
     <value>Apps</value>
   </data>
+  <data name="StartUrl.Header" xml:space="preserve">
+    <value>Start Url</value>
+  </data>
+  <data name="WebAppId.Header" xml:space="preserve">
+    <value>Web-App ID</value>
+  </data>
 </root>

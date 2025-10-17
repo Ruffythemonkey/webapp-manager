@@ -8,19 +8,41 @@
     behaviors:NavigationViewHeaderBehavior.HeaderMode="Never"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea" ColumnSpacing="12" >
+    <Grid
+        x:Name="ContentArea"
+        ColumnSpacing="12">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
         <StackPanel Spacing="12">
-            <ComboBox HorizontalAlignment="Stretch" Header="Profiels"/>
+            <ComboBox
+                x:Uid="FireFoxProfile"
+                HorizontalAlignment="Stretch"
+                ItemsSource="{x:Bind ViewModel.WebApps.taskbarTabs, Mode=OneWay}"
+                SelectedItem="{x:Bind ViewModel.SelectedWebApp, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate
+                        xmlns:t="using:FoxyWebAppManager.Models"
+                        x:DataType="t:TaskbarTab">
+                        <TextBlock Text="{x:Bind shortcutRelativePath}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
 
-        <StackPanel Spacing="12" Grid.Column="1">
-            <TextBox Header="Url"/>
+        <StackPanel
+            Grid.Column="1"
+            Spacing="12">
+            <TextBox
+                x:Uid="WebAppId"
+                IsEnabled="False"
+                Text="{x:Bind ViewModel.SelectedWebApp.id, Mode=OneWay}" />
+            <TextBox
+                x:Uid="StartUrl"
+                Text="{x:Bind ViewModel.SelectedWebApp.startUrl, Mode=OneWay}" />
         </StackPanel>
-        
+
     </Grid>
 </Page>
