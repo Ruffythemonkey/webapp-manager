@@ -1,4 +1,5 @@
 ﻿using FoxyWebAppManager.Models;
+using static FoxyWebAppManager.Helpers.FireFoxIniParser;
 
 namespace FoxyWebAppManager.Extensions
 {
@@ -32,7 +33,20 @@ namespace FoxyWebAppManager.Extensions
 
                 Shortcut.Shortcut.CreateShortcutWithAppId(destPath, firfoxPath, args, iconPath, setJson.taskbarTab.id);
             }
-
         }
+
+        public static List<FireFoxProfile> ProfilesWithWebApps(this List<FireFoxProfile> profiles)
+            => IniReaderFireFox.LoadProfilesFromInstalledFF()
+                    .Where(x =>
+                    {
+                        var t = x.GetMainFolder().GetJson().taskbarTabs;
+                        if (t.Count > 0 && t.IsAnyTaskBarTabItemInStartMenu())
+                        {
+                            return true;
+                        }
+                        return false;
+                    })
+                    .ToList();
+
     }
 }

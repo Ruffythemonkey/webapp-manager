@@ -124,7 +124,7 @@
     <value>FoxyWebAppManager</value>
   </data>
   <data name="Shell_Main.Content" xml:space="preserve">
-    <value>Profile</value>
+    <value>Apps Erstellen</value>
   </data>
   <data name="FirefoxPath.Header" xml:space="preserve">
     <value>Firefox Pfad</value>
@@ -145,12 +145,18 @@
     <value>Host Url (Web-App)</value>
   </data>
   <data name="Shell_Apps.Content" xml:space="preserve">
-    <value>Apps</value>
+    <value>Apps Bearbeiten</value>
   </data>
   <data name="StartUrl.Header" xml:space="preserve">
     <value>Start Url</value>
   </data>
   <data name="WebAppId.Header" xml:space="preserve">
     <value>Web-App ID</value>
+  </data>
+  <data name="Apps.Header" xml:space="preserve">
+    <value>Web-Apps</value>
+  </data>
+  <data name="SaveApp.Content" xml:space="preserve">
+    <value>Web-App Änderung Speichern</value>
   </data>
 </root>

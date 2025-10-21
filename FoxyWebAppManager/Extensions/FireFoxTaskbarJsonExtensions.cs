@@ -15,6 +15,22 @@ namespace FoxyWebAppManager.Extensions
 
             public string GetShortcutRelativePath(Uri sourceUri)
                 => json.GetTaskBarTabItem(sourceUri).shortcutRelativePath;
+
+            /// <summary>
+            /// Return a list of Web-Apps this available in StartMenu & Registert in Firefox
+            /// </summary>
+            /// <returns></returns>
+            public List<TaskbarTab> GetAvailableWebApps()
+            {
+                var Startmenu = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
+                return json.taskbarTabs.Where(x =>
+                {
+                    var webApp = Path.Combine(Startmenu, x.shortcutRelativePath);
+                    var exist = File.Exists(webApp);
+                    return exist;
+
+                }).ToList();
+            }
         }
     }
 }

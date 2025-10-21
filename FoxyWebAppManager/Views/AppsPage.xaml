@@ -16,20 +16,34 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
+
+
         <StackPanel Spacing="12">
             <ComboBox
                 x:Uid="FireFoxProfile"
                 HorizontalAlignment="Stretch"
-                ItemsSource="{x:Bind ViewModel.WebApps.taskbarTabs, Mode=OneWay}"
-                SelectedItem="{x:Bind ViewModel.SelectedWebApp, Mode=TwoWay}">
+                ItemsSource="{x:Bind ViewModel.FoxProfiles, Mode=OneWay}"
+                SelectedItem="{x:Bind ViewModel.SelectedProfil, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate
                         xmlns:t="using:FoxyWebAppManager.Models"
-                        x:DataType="t:TaskbarTab">
-                        <TextBlock Text="{x:Bind shortcutRelativePath}" />
+                        x:DataType="t:FireFoxProfile">
+                        <TextBlock Text="{x:Bind Name}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <ListView
+                x:Uid="Apps"
+                ItemsSource="{x:Bind ViewModel.WebApps, Mode=OneWay}"
+                SelectedItem="{x:Bind ViewModel.SelectedWebApp, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate
+                        xmlns:t="using:FoxyWebAppManager.Models"
+                        x:DataType="t:TaskbarTab">
+                        <TextBlock Text="{x:Bind scopes[0].hostname}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
 
         <StackPanel
@@ -38,11 +52,33 @@
             <TextBox
                 x:Uid="WebAppId"
                 IsEnabled="False"
-                Text="{x:Bind ViewModel.SelectedWebApp.id, Mode=OneWay}" />
+                Text="{x:Bind ViewModel.SelectedWebApp.id, Mode=OneWay, FallbackValue={x:Null}}" />
             <TextBox
                 x:Uid="StartUrl"
-                Text="{x:Bind ViewModel.SelectedWebApp.startUrl, Mode=OneWay}" />
+                Text="{x:Bind ViewModel.SelectedWebApp.startUrl, Mode=TwoWay, FallbackValue={x:Null}}" />
+
+            <StackPanel
+                Orientation="Horizontal"
+                Spacing="12">
+                <Image
+                    Width="64"
+                    Height="64"
+                    HorizontalAlignment="Left"
+                    Source="{x:Bind ViewModel.Icon, Mode=OneWay}" />
+                <Button
+                    x:Uid="OtherIcon"
+                    Command="{x:Bind ViewModel.PickIconCommand}" />
+            </StackPanel>
+
+
+            <Button
+                x:Uid="SaveApp"
+                Margin="0,12"
+                Command="{x:Bind ViewModel.UpdateWebAppCommand}"
+                Style="{StaticResource AccentButtonStyle}" />
         </StackPanel>
+
+
 
     </Grid>
 </Page>

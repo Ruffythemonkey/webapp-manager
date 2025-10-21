@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="24" />
         </Grid.RowDefinitions>
         <Grid
             x:Name="AppTitleBar"
@@ -99,5 +100,14 @@
                 <Frame x:Name="NavigationFrame" />
             </Grid>
         </NavigationView>
+
+        <TextBlock
+            Grid.Row="2"
+            Margin="16,0"
+            VerticalAlignment="Center">
+            <Run Text="You can find this Project under" />
+            <Hyperlink NavigateUri="https://github.com/Ruffythemonkey/webapp-manager">github</Hyperlink>
+        </TextBlock>
+
     </Grid>
 </Page>

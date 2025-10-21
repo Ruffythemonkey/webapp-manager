@@ -145,12 +145,18 @@
     <value>Host Url (Web-App)</value>
   </data>
   <data name="Shell_Apps.Content" xml:space="preserve">
-    <value>Apps</value>
+    <value>Edit Apps</value>
   </data>
   <data name="StartUrl.Header" xml:space="preserve">
     <value>Start Url</value>
   </data>
   <data name="WebAppId.Header" xml:space="preserve">
     <value>Web-App ID</value>
+  </data>
+  <data name="Apps.Header" xml:space="preserve">
+    <value>Web-Apps</value>
+  </data>
+  <data name="SaveApp.Content" xml:space="preserve">
+    <value>Web App Change Save</value>
   </data>
 </root>
