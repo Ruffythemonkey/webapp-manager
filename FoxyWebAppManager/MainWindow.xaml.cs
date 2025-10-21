@@ -14,7 +14,9 @@ public sealed partial class MainWindow : WindowEx
     {
         InitializeComponent();
 
+        //AppWindow.SetTaskbarIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
+        this.CenterOnScreen();
         Content = null;
         Title = "AppDisplayName".GetLocalized();
 

@@ -1,7 +1,6 @@
 ﻿using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
 using FoxyWebAppManager.ViewModels;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.Storage.Pickers;
 
 namespace FoxyWebAppManager.Extensions
@@ -49,7 +48,8 @@ namespace FoxyWebAppManager.Extensions
             {
                 try
                 {
-                    var url = viewModel.WebHost;
+                    var url = viewModel.WebHost.ToUriSchemeString();
+                    
                     if (url.IsUrl() && await url.IsDnsResolvableUrlAsync())
                     {
                         var loadedFavIcon = await FavIconHelper.IconLoadAsync(new Uri(url));
@@ -82,8 +82,11 @@ namespace FoxyWebAppManager.Extensions
                 }
                 finally
                 {
-                    viewModel._dispatcherQueue.TryEnqueue(() 
-                        => viewModel.SaveWebAppCommand.NotifyCanExecuteChanged());
+                    viewModel._dispatcherQueue.TryEnqueue(() =>
+                    {
+                        viewModel.SaveWebAppCommand.NotifyCanExecuteChanged();
+                        viewModel.OpenFavIconFromPathCommand.NotifyCanExecuteChanged();
+                    });
                 }
 
             }

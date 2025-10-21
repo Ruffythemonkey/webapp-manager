@@ -159,4 +159,10 @@
   <data name="SaveApp.Content" xml:space="preserve">
     <value>Web-App Änderung Speichern</value>
   </data>
+  <data name="IconUpdate.Content" xml:space="preserve">
+    <value>Icon ändern</value>
+  </data>
+  <data name="IconUpdate.ToolTipService.ToolTip" xml:space="preserve">
+    <value>In den meisten fällen wird das geänderte Icon erst sichtbar wenn der Explorer neu gestartet wird.</value>
+  </data>
 </root>

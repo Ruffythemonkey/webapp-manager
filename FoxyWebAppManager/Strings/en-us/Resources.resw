@@ -159,4 +159,10 @@
   <data name="SaveApp.Content" xml:space="preserve">
     <value>Web App Change Save</value>
   </data>
+  <data name="IconUpdate.Content" xml:space="preserve">
+    <value>change Icon</value>
+  </data>
+  <data name="IconUpdate.ToolTipService.ToolTip" xml:space="preserve">
+    <value>In most cases, the changed icon will only become visible when Explorer is restarted.</value>
+  </data>
 </root>

@@ -66,7 +66,7 @@
                     HorizontalAlignment="Left"
                     Source="{x:Bind ViewModel.Icon, Mode=OneWay}" />
                 <Button
-                    x:Uid="OtherIcon"
+                    x:Uid="IconUpdate"
                     Command="{x:Bind ViewModel.PickIconCommand}" />
             </StackPanel>
 

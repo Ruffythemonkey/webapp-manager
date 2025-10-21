@@ -10,7 +10,7 @@ namespace FoxyWebAppManager.ViewModels;
 
 public partial class MainViewModel : BaseViewModel
 {
-
+    
     private bool CanWebAppSaveExecute => IsValidHost && File.Exists(FireFoxData.Path);
 
     [ObservableProperty]
@@ -37,11 +37,11 @@ public partial class MainViewModel : BaseViewModel
     [RelayCommand]
     private async Task OpenFireFoxPath() => await this.OpenFireFoxPathEx();
 
-    [RelayCommand]
+    [RelayCommand(CanExecute =nameof(CanWebAppSaveExecute))]
     private async Task OpenFavIconFromPath() => await this.OpenIconPathEx();
 
     [RelayCommand(CanExecute = nameof(CanWebAppSaveExecute))]
-    private async Task SaveWebApp() => await SelectedFireFoxProfile.CreateWebApp(new Uri(WebHost), FireFoxData.Path, FavIcon);
+    private async Task SaveWebApp() => await SelectedFireFoxProfile.CreateWebApp(new Uri(WebHost.ToUriSchemeString()), FireFoxData.Path, FavIcon);
 
     [RelayCommand]
     private void SwitchUserChrome(bool activate) =>

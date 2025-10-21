@@ -11,6 +11,15 @@ namespace FoxyWebAppManager.Extensions
                 string pattern = @"^https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(:[0-9]+)?(\/.*)?$";
                 return Regex.IsMatch(s, pattern);
             }
+
+            public string ToUriSchemeString()
+            {
+                if (!s.StartsWith("https://") && !s.StartsWith("http://"))
+                {
+                    return $"https://{s}";
+                }
+                return s;
+            }
         }
     }
 }
