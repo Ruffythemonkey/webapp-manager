@@ -35,10 +35,7 @@ namespace FoxyWebAppManager.Extensions
             }
         }
 
-        public static List<FireFoxProfile> ProfilesWithWebApps(this List<FireFoxProfile> profiles)
-            => IniReaderFireFox.LoadProfilesFromInstalledFF()
-                    .Where(x => x.GetMainFolder().GetJson().taskbarTabs.IsAnyTaskBarTabItemInStartMenu())
-                    .ToList();
+   
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FoxyWebAppManager.Models;
-using static FoxyWebAppManager.Helpers.FireFoxIniParser;
 using FoxyWebAppManager.Extensions;
 using CommunityToolkit.Mvvm.Input;
 
@@ -22,7 +21,7 @@ public partial class AppsViewModel : BaseViewModel
     public partial TaskbarTab SelectedWebApp { get; set; }
 
     [ObservableProperty]
-    public partial string Icon { get; set; }
+    public partial string Icon { get; set; } = "/Assets/WindowIcon.ico";
 
     [RelayCommand]
     private async Task PickIcon() => Icon = await SelectedWebApp.SetIconAsync(SelectedProfil); 
@@ -65,11 +64,8 @@ public partial class AppsViewModel : BaseViewModel
         }
     }
 
-    public override void OnNavigatedFrom()
-    {
-        //throw new NotImplementedException();
-    }
+    public override void OnNavigatedFrom(){}
 
     public override void OnNavigatedTo(object parameter)
-        => FoxProfiles = FoxProfiles!.ProfilesWithWebApps();
+       => this.ProfilesWithWebApps();
 }
