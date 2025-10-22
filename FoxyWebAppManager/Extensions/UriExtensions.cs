@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace FoxyWebAppManager.Extensions
+﻿namespace FoxyWebAppManager.Extensions
 {
     public static class UriExtension
     {
@@ -19,7 +17,8 @@ namespace FoxyWebAppManager.Extensions
             /// </summary>
             /// <returns>escsoft.de</returns>
             public string GetTopLevelDomain()
-               => $"{uri.Scheme}://{Task.Run(()=> TLDExtractor.TLDExtractor.Extract(uri)).GetAwaiter().GetResult().EffectiveDomain}";
+               => $"{uri.Scheme}://{Task.Run(() => TLDExtractor.TLDExtractor.Extract(uri)).GetAwaiter().GetResult().EffectiveDomain}";
+
 
             public bool DomainHasSubLevelDomain()
                 => uri.DnsSafeHost.Split(".").Count() > 1;
