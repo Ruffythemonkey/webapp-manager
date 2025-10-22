@@ -65,7 +65,7 @@ public partial class App : Application
             // Views and ViewModels
             services.AddTransient<AppsViewModel>();
             services.AddTransient<AppsPage>();
-            services.AddSingleton<MainViewModel>();
+            services.AddTransient<MainViewModel>();
             services.AddTransient<MainPage>();
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();

@@ -2,6 +2,7 @@
 using FoxyWebAppManager.Models;
 using FoxyWebAppManager.Extensions;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace FoxyWebAppManager.ViewModels;
 
@@ -15,7 +16,7 @@ public partial class AppsViewModel : BaseViewModel
     public partial FireFoxProfile SelectedProfil {  get; set; }
 
     [ObservableProperty]
-    public partial List<TaskbarTab> WebApps { get; set; }
+    public partial ObservableCollection<TaskbarTab> WebApps { get; set; } = [];
 
     [ObservableProperty]
     public partial TaskbarTab SelectedWebApp { get; set; }
@@ -29,6 +30,9 @@ public partial class AppsViewModel : BaseViewModel
     [RelayCommand]
     private void UpdateWebApp() => SelectedWebApp.UpdateWebApp(Icon, SelectedProfil);
 
+    [RelayCommand]
+    private void RemoveWebAppUi(TaskbarTab item) => this.RemoveWebApp(item, SelectedProfil);
+
     partial void OnFoxProfilesChanged(List<FireFoxProfile> value)
     {
         if (value.Count > 0)
@@ -41,26 +45,36 @@ public partial class AppsViewModel : BaseViewModel
     {
         if (value is FireFoxProfile p)
         {
-            WebApps = p.GetMainFolder().GetJson().GetAvailableWebApps();
+            WebApps.Clear();
+            foreach (var item in p.GetMainFolder().GetJson().GetAvailableWebApps())
+            {
+                WebApps.Add(item);
+            }
+            SelectedWebApp = WebApps.FirstOrDefault()!;
+            /*p.GetMainFolder().GetJson().GetAvailableWebApps();*/
         }
     }
 
-    partial void OnWebAppsChanged(List<TaskbarTab> value)
-    {
-        if (value is List<TaskbarTab> tabs)
-        {
-            _dispatcherQueue.TryEnqueue(() =>
-            {
-                SelectedWebApp = tabs.FirstOrDefault()!;
-            });
-        }
-    }
+    //partial void OnWebAppsChanged(ObservableCollection<TaskbarTab> value)
+    //{
+    //    if (value is ObservableCollection<TaskbarTab> tabs)
+    //    {
+    //        _dispatcherQueue.TryEnqueue(() =>
+    //        {
+    //            SelectedWebApp = tabs.FirstOrDefault()!;
+    //        });
+    //    }
+    //}
 
     partial void OnSelectedWebAppChanged(TaskbarTab value)
     {
         if (value is TaskbarTab tab)
         {
             Icon = tab.GetIcon(SelectedProfil);
+        }
+        else
+        {
+            Icon = "/Assets/WindowIcon.ico";
         }
     }
 

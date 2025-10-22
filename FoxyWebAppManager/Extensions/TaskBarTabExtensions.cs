@@ -68,6 +68,22 @@ namespace FoxyWebAppManager.Extensions
                 }
 
             }
+
+            public void RemoveWebAppIO(FireFoxProfile profile)
+            {
+                var env_startmenu = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
+                var lnkPath = Path.Combine(env_startmenu, taskbarTab.shortcutRelativePath);
+                if (File.Exists(lnkPath))
+                    File.Delete(lnkPath);
+
+                if (File.Exists(taskbarTab.GetIcon(profile)))
+                    File.Delete(taskbarTab.GetIcon(profile));
+
+                var json = profile.GetMainFolder().GetJson();
+                json.taskbarTabs.Remove(taskbarTab);
+                json.WriteJson(profile);
+
+            }
         }
 
         public static bool IsAnyTaskBarTabItemInStartMenu(this List<TaskbarTab> tabs)

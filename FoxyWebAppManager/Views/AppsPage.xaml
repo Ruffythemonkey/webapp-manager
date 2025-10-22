@@ -8,6 +8,8 @@
     behaviors:NavigationViewHeaderBehavior.HeaderMode="Never"
     mc:Ignorable="d">
 
+
+
     <Grid
         x:Name="ContentArea"
         ColumnSpacing="12">
@@ -36,11 +38,32 @@
                 x:Uid="Apps"
                 ItemsSource="{x:Bind ViewModel.WebApps, Mode=OneWay}"
                 SelectedItem="{x:Bind ViewModel.SelectedWebApp, Mode=TwoWay}">
+                <ListView.Resources>
+                    <StandardUICommand
+                        x:Key="Remove"
+                        Command="{x:Bind ViewModel.RemoveWebAppUiCommand}" />
+                </ListView.Resources>
                 <ListView.ItemTemplate>
                     <DataTemplate
                         xmlns:t="using:FoxyWebAppManager.Models"
                         x:DataType="t:TaskbarTab">
-                        <TextBlock Text="{x:Bind scopes[0].hostname}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Bind scopes[0].hostname}" />
+                            <Button
+                                Grid.Column="1"
+                                Background="Transparent"
+                                Command="{StaticResource Remove}"
+                                CommandParameter="{x:Bind}">
+                                <FontIcon
+                                    FontSize="10"
+                                    Foreground="Red"
+                                    Glyph="&#xE894;" />
+                            </Button>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

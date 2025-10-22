@@ -1,4 +1,6 @@
 ﻿using FoxyWebAppManager.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FoxyWebAppManager.Extensions
 {
@@ -30,6 +32,16 @@ namespace FoxyWebAppManager.Extensions
                     return exist;
 
                 }).ToList();
+            }
+
+            /// <summary>
+            /// Write the taskbartabs.json with this FireFoxTaskbaJson object
+            /// </summary>
+            /// <param name="profile"></param>
+            public void WriteJson(FireFoxProfile profile)
+            {
+                var j = JsonSerializer.Serialize(json, FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson);
+                File.WriteAllText(profile.GetMainFolder().JsonFile,j);
             }
         }
     }
