@@ -44,7 +44,7 @@
     <PackageReference Include="System.Drawing.Common" Version="9.0.10" />
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
-    <PackageReference Include="TLDExtractor" Version="1.0.0" />
+    <PackageReference Include="TLDExtractor" Version="1.0.2" />
     <PackageReference Include="WinUIEx" Version="2.9.0" />
   </ItemGroup>
 
