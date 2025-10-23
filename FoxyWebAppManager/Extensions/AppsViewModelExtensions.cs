@@ -9,34 +9,25 @@ namespace FoxyWebAppManager.Extensions
         extension(AppsViewModel vm)
         {
             public void ProfilesWithWebApps()
-            { 
+            {
                 vm.FoxProfiles = IniReaderFireFox.LoadProfilesFromInstalledFF()
                .Where(x => x.GetMainFolder().GetJson().taskbarTabs.IsAnyTaskBarTabItemInStartMenu())
-               .ToList() 
-               is { Count: > 0} apps ? apps : null!;
+               .ToList()
+               is { Count: > 0 } apps ? apps : null!;
             }
 
-            public void RemoveWebApp(TaskbarTab tab,FireFoxProfile profile)
+            public void RemoveWebApp(TaskbarTab tab, FireFoxProfile profile)
             {
                 if (vm.SelectedWebApp == tab)
-                {
-                    if (vm.WebApps.Count > 1)
-                    {
-                        vm.SelectedWebApp = vm.WebApps.First(x => x != tab);
-                    }
-                }
+                    vm.SelectedWebApp = vm.WebApps.FirstOrDefault(x => x != tab)!;
 
                 tab.RemoveWebAppIO(profile);
-                if (vm.WebApps.Count == 1)
-                {
+                vm.WebApps.Remove(tab);
+
+                if (vm.WebApps.Count == 0)
                     vm.ProfilesWithWebApps();
-                }
-                else
-                {
-                    vm.WebApps.Remove(tab);
-                }
             }
-     
+
         }
     }
 }
