@@ -13,7 +13,7 @@ public partial class AppsViewModel : BaseViewModel
     public partial List<FireFoxProfile> FoxProfiles { get; set; }
 
     [ObservableProperty]
-    public partial FireFoxProfile SelectedProfil {  get; set; }
+    public partial FireFoxProfile SelectedProfil { get; set; }
 
     [ObservableProperty]
     public partial ObservableCollection<TaskbarTab> WebApps { get; set; } = [];
@@ -25,7 +25,7 @@ public partial class AppsViewModel : BaseViewModel
     public partial string Icon { get; set; } = "/Assets/WindowIcon.ico";
 
     [RelayCommand]
-    private async Task PickIcon() => Icon = await SelectedWebApp.SetIconAsync(SelectedProfil); 
+    private async Task PickIcon() => Icon = await SelectedWebApp.SetIconAsync(SelectedProfil);
 
     [RelayCommand]
     private void UpdateWebApp() => SelectedWebApp.UpdateWebApp(Icon, SelectedProfil);
@@ -34,37 +34,20 @@ public partial class AppsViewModel : BaseViewModel
     private void RemoveWebAppUi(TaskbarTab item) => this.RemoveWebApp(item, SelectedProfil);
 
     partial void OnFoxProfilesChanged(List<FireFoxProfile> value)
-    {
-        if (value.Count > 0)
-        {
-            SelectedProfil = value.FirstOrDefault() ?? null!;
-        }
-    }
+         => _dispatcherQueue.TryEnqueue(() => SelectedProfil = value.FirstOrDefault()!);
 
     partial void OnSelectedProfilChanged(FireFoxProfile value)
     {
+        WebApps.Clear();
         if (value is FireFoxProfile p)
         {
-            WebApps.Clear();
             foreach (var item in p.GetMainFolder().GetJson().GetAvailableWebApps())
             {
                 WebApps.Add(item);
             }
-            SelectedWebApp = WebApps.FirstOrDefault()!;
-            /*p.GetMainFolder().GetJson().GetAvailableWebApps();*/
         }
+        _dispatcherQueue.TryEnqueue(() => SelectedWebApp = WebApps.FirstOrDefault()!);
     }
-
-    //partial void OnWebAppsChanged(ObservableCollection<TaskbarTab> value)
-    //{
-    //    if (value is ObservableCollection<TaskbarTab> tabs)
-    //    {
-    //        _dispatcherQueue.TryEnqueue(() =>
-    //        {
-    //            SelectedWebApp = tabs.FirstOrDefault()!;
-    //        });
-    //    }
-    //}
 
     partial void OnSelectedWebAppChanged(TaskbarTab value)
     {
@@ -78,7 +61,7 @@ public partial class AppsViewModel : BaseViewModel
         }
     }
 
-    public override void OnNavigatedFrom(){}
+    public override void OnNavigatedFrom() { }
 
     public override void OnNavigatedTo(object parameter)
        => this.ProfilesWithWebApps();
