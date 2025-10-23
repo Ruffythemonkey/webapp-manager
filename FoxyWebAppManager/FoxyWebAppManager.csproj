@@ -14,12 +14,8 @@
 	<UseWinUI>true</UseWinUI>
 	<LangVersion>preview</LangVersion>
     <EnableMsixTooling>true</EnableMsixTooling>
-	<WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>true</WindowsAppSDKBootstrapAutoInitializeOptions_OnNoMatch_ShowUI>
-    <WindowsPackageType>None</WindowsPackageType>
-	<EnableTrimAnalyzer>false</EnableTrimAnalyzer>
-	<TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
-	<!--<PublishAot>true</PublishAot>-->
-	  <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+	<WindowsPackageType>None</WindowsPackageType>
+	<DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
 
 
@@ -57,6 +53,10 @@
     <Content Update="Assets\WindowIcon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
