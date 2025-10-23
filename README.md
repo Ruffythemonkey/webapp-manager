@@ -19,7 +19,7 @@ Launch your favorite sites like native applications — without the browser’s 
 </p>
 ---
 <p align="center">
-  <img width="789" height="638" alt="Screenshot 2025-10-21 185449" src="https://github.com/user-attachments/assets/8d69adee-bada-4536-85c7-37058e890eec" />
+ <img width="946" height="746" alt="grafik" src="https://github.com/user-attachments/assets/0f6dd53e-fad7-4d2a-91a8-6401bd3ed7b9" />
 </p>
 ---
 
