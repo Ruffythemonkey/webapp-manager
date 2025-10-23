@@ -67,7 +67,10 @@ namespace FoxyWebAppManager.Extensions
             sourceIcon = TryConvertIcon(sourceIcon);
 
             var destinationIcon = Path.Combine(data.mainFolder.IconFolder, $"{data.taskbarTab.id}.ico");
-            File.Move(sourceIcon, destinationIcon, true);
+
+            if (File.Exists(sourceIcon))
+                File.Move(sourceIcon, destinationIcon, true);
+
             return destinationIcon;
         }
 
@@ -80,7 +83,7 @@ namespace FoxyWebAppManager.Extensions
                 var name = Path.GetFileNameWithoutExtension(sourceIcon);
                 var tmpFullName = Path.Combine(Path.GetTempPath(), $"{name}.ico");
                 var iconConvert = Helpers.ImageToIconConverterHelper.ConvertToIcon(sourceIcon, tmpFullName, 64);
-                
+
                 return iconConvert ? tmpFullName : throw new BadImageFormatException();
 
             }
