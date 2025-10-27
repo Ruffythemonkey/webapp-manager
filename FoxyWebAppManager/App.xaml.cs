@@ -63,6 +63,8 @@ public partial class App : Application
             // Core Services
 
             // Views and ViewModels
+            services.AddTransient<ProfilesViewModel>();
+            services.AddTransient<ProfilesPage>();
             services.AddTransient<AppsViewModel>();
             services.AddTransient<AppsPage>();
             services.AddTransient<MainViewModel>();

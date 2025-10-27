@@ -2,16 +2,22 @@
 {
     public class FireFoxMainFolder
     {
-        public string ProfielPath { get; }
+        /// <summary>
+        /// Profile Directory 
+        /// </summary>
+        public string ProfilePath { get; }
 
+        /// <summary>
+        /// Path taskbartabs.json
+        /// </summary>
         public string JsonFile
         {
-            get => Path.Combine(ProfielPath, "taskbartabs", "taskbartabs.json");
+            get => Path.Combine(ProfilePath, "taskbartabs", "taskbartabs.json");
         }
 
         public string TaskBarFolder
         {
-            get => Path.Combine(ProfielPath, "taskbartabs");
+            get => Path.Combine(ProfilePath, "taskbartabs");
         }
 
         public bool IsTaskbarTabsJsonExist
@@ -38,7 +44,7 @@
             {
                 throw new DirectoryNotFoundException(path);
             }
-            ProfielPath = path;
+            ProfilePath = path;
         }
 
     }

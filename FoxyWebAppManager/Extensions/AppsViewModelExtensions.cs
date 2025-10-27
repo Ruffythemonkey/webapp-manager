@@ -1,6 +1,6 @@
-﻿using FoxyWebAppManager.Models;
+﻿using FoxyWebAppManager.Helpers;
+using FoxyWebAppManager.Models;
 using FoxyWebAppManager.ViewModels;
-using static FoxyWebAppManager.Helpers.FireFoxIniParser;
 
 namespace FoxyWebAppManager.Extensions
 {
@@ -10,7 +10,7 @@ namespace FoxyWebAppManager.Extensions
         {
             public void ProfilesWithWebApps()
             {
-                vm.FoxProfiles = IniReaderFireFox.LoadProfilesFromInstalledFF()
+                vm.FoxProfiles = FireFoxIniParser.LoadProfilesFromInstalledFF()
                .Where(x => x.GetMainFolder().GetJson().taskbarTabs.IsAnyTaskBarTabItemInStartMenu())
                .ToList()
                is { Count: > 0 } apps ? apps : null!;

@@ -124,7 +124,7 @@
     <value>FoxyWebAppManager</value>
   </data>
   <data name="Shell_Main.Content" xml:space="preserve">
-    <value>Profiles</value>
+    <value>Create Apps</value>
   </data>
   <data name="FirefoxPath.Header" xml:space="preserve">
     <value>Firefox Path</value>
@@ -164,5 +164,32 @@
   </data>
   <data name="IconUpdate.ToolTipService.ToolTip" xml:space="preserve">
     <value>In most cases, the changed icon will only become visible when Explorer is restarted.</value>
+  </data>
+  <data name="Shell_Profiles.Content" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="Delete.Content" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Rename.Header" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="Profiles.Text" xml:space="preserve">
+    <value>Profile:</value>
+  </data>
+  <data name="CreateNewProfile.Text" xml:space="preserve">
+    <value>Create new Profiel</value>
+  </data>
+  <data name="Remove.Header" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Remove.Description" xml:space="preserve">
+    <value>caution this Remove the Profile completely</value>
+  </data>
+  <data name="Rename.Description" xml:space="preserve">
+    <value>Rename profile</value>
+  </data>
+  <data name="RenameB.Content" xml:space="preserve">
+    <value>Rename</value>
   </data>
 </root>

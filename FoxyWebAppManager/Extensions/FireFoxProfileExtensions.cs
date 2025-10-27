@@ -1,5 +1,4 @@
 ﻿using FoxyWebAppManager.Models;
-using static FoxyWebAppManager.Helpers.FireFoxIniParser;
 
 namespace FoxyWebAppManager.Extensions
 {
@@ -7,6 +6,10 @@ namespace FoxyWebAppManager.Extensions
     {
         extension(FireFoxProfile profile)
         {
+            /// <summary>
+            /// Retrieve all File/Dir Paths from Profile
+            /// </summary>
+            /// <returns></returns>
             public FireFoxMainFolder GetMainFolder()
             {
                 var _appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -16,6 +19,13 @@ namespace FoxyWebAppManager.Extensions
                     profile.IsRelative ? Path.Combine(_standarfolder, profile.Path) : profile.Path);
             }
 
+            /// <summary>
+            /// Create Web-App in StartMenu Directory / FireFox Web-Apps
+            /// </summary>
+            /// <param name="url"></param>
+            /// <param name="firfoxPath"></param>
+            /// <param name="iconPath"></param>
+            /// <returns></returns>
             public async Task CreateWebApp(Uri url, string firfoxPath, string iconPath)
             {
 
@@ -33,9 +43,19 @@ namespace FoxyWebAppManager.Extensions
 
                 Shortcut.Shortcut.CreateShortcutWithAppId(destPath, firfoxPath, args, iconPath, setJson.taskbarTab.id);
             }
+
+            /// <summary>
+            /// cautions this delete all Profile Files
+            /// </summary>
+            public void RemoveProfileFolder()
+            {
+                var dir = profile.GetMainFolder().ProfilePath;
+
+                if (Directory.Exists(dir))
+                {
+                    Directory.Delete(dir,true);
+                }
+            }
         }
-
-   
-
     }
 }

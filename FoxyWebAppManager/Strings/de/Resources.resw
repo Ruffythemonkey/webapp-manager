@@ -165,4 +165,31 @@
   <data name="IconUpdate.ToolTipService.ToolTip" xml:space="preserve">
     <value>In den meisten fällen wird das geänderte Icon erst sichtbar wenn der Explorer neu gestartet wird.</value>
   </data>
+  <data name="Shell_Profiles.Content" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Delete.Content" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Rename.Header" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="Profiles.Text" xml:space="preserve">
+    <value>Profil:</value>
+  </data>
+  <data name="CreateNewProfile.Text" xml:space="preserve">
+    <value>Erstelle neues Profiel</value>
+  </data>
+  <data name="Remove.Header" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Remove.Description" xml:space="preserve">
+    <value>Vorsicht, das Profil wird vollständig entfernt</value>
+  </data>
+  <data name="Rename.Description" xml:space="preserve">
+    <value>Profil umbenennen</value>
+  </data>
+  <data name="Renameb.Content" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
 </root>

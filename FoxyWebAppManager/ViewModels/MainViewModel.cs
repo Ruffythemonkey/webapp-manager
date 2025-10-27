@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using FoxyWebAppManager.Extensions;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
-using static FoxyWebAppManager.Helpers.FireFoxIniParser;
 
 
 namespace FoxyWebAppManager.ViewModels;
@@ -56,7 +55,7 @@ public partial class MainViewModel : BaseViewModel
     }
 
     public override void OnNavigatedTo(object parameter)
-        => FoxProfiles ??= IniReaderFireFox.LoadProfilesFromInstalledFF();
+        => FoxProfiles ??= FireFoxIniParser.LoadProfilesFromInstalledFF();
 
     partial void OnSelectedFireFoxProfileChanged(FireFoxProfile value) 
         => IsCustomizeUserStyle = new FireFoxCssHelper(SelectedFireFoxProfile).IsUserChromeActive;

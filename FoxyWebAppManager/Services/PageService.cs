@@ -16,6 +16,7 @@ public class PageService : IPageService
     {
         Configure<MainViewModel, MainPage>();
         Configure<AppsViewModel, AppsPage>();
+        Configure<ProfilesViewModel, ProfilesPage>();
     }
 
     public Type GetPageType(string key)

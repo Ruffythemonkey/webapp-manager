@@ -2,61 +2,114 @@
 
 namespace FoxyWebAppManager.Helpers;
 
-public class FireFoxIniParser
+public static class FireFoxIniParser
 {
-    public class IniReaderFireFox
+
+    public static string FireFoxProfileIniPath
     {
-        public static List<FireFoxProfile> LoadProfilesFromInstalledFF()
+        get 
         {
             var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            appData = Path.Combine(appData, "Mozilla/Firefox/profiles.ini");
-            if (File.Exists(appData))
-            {
-                return LoadProfiles(appData);
-            }
-            return new List<FireFoxProfile>();
+            return Path.Combine(appData, "Mozilla/Firefox/profiles.ini");
         }
+    }
 
-        public static List<FireFoxProfile> LoadProfiles(string file)
+    public static List<FireFoxProfile> LoadProfilesFromInstalledFF()
+    {
+        if (File.Exists(FireFoxProfileIniPath))
+            return LoadProfiles(FireFoxProfileIniPath);
+        
+        return new List<FireFoxProfile>();
+    }
+
+    public static List<FireFoxProfile> LoadProfiles(string file)
+    {
+        var profiles = new List<FireFoxProfile>();
+        FireFoxProfile? current = null;
+
+        foreach (var rawLine in File.ReadAllLines(file))
         {
-            var profiles = new List<FireFoxProfile>();
-            FireFoxProfile? current = null;
+            var line = rawLine.Trim();
 
-            foreach (var rawLine in File.ReadAllLines(file))
+            if (string.IsNullOrWhiteSpace(line) || line.StartsWith(";"))
+                continue;
+
+            // Neue Section erkannt
+            if (line.StartsWith("[") && line.EndsWith("]"))
             {
-                var line = rawLine.Trim();
 
-                if (string.IsNullOrWhiteSpace(line) || line.StartsWith(";"))
-                    continue;
+                if (current != null)
+                    profiles.Add(current);
 
-                // Neue Section erkannt
-                if (line.StartsWith("[") && line.EndsWith("]"))
-                {
+                current = new FireFoxProfile { Section = line[1..^1] };
+            }
+            else if (current != null && line.Contains('='))
+            {
+                var parts = line.Split('=', 2);
+                var key = parts[0].Trim().ToLower();
+                var value = parts[1].Trim();
 
-                    if (current != null)
-                        profiles.Add(current);
+                if (key == "name") current.Name = value;
+                if (key == "path") current.Path = value;
+                if (key == "isrelative") current.IsRelative = value == "1" ? true : false;
+            }
+        }
 
-                    current = new FireFoxProfile { Section = line[1..^1] };
-                }
-                else if (current != null && line.Contains('='))
-                {
-                    var parts = line.Split('=', 2);
-                    var key = parts[0].Trim().ToLower();
-                    var value = parts[1].Trim();
+        if (current != null)
+            profiles.Add(current);
 
-                    if (key == "name") current.Name = value;
-                    if (key == "path") current.Path = value;
-                    if (key == "isrelative") current.IsRelative = value == "1" ? true : false;
-                }
+        return profiles
+            .Where(x => !string.IsNullOrWhiteSpace(x.Name) && !string.IsNullOrWhiteSpace(x.Path))
+            .ToList();
+    }
+
+    private static List<string> RemoveAllIniProfiles()
+    {
+        if (!File.Exists(FireFoxProfileIniPath))
+            return [];
+
+        bool insideSection = false;
+        List<string> updateLines = [];
+
+        foreach (var rawLine in File.ReadAllLines(FireFoxProfileIniPath))
+        {
+            var line = rawLine.Trim();
+            
+            if(line.StartsWith("[") && line.EndsWith("]"))
+            {
+                insideSection = line[1..^1].StartsWith("Profile"); 
             }
 
-            if (current != null)
-                profiles.Add(current);
-
-            return profiles
-                .Where(x => !string.IsNullOrWhiteSpace(x.Name) && !string.IsNullOrWhiteSpace(x.Path))
-                .ToList();
+            if (!insideSection)
+            {
+                updateLines.Add(line);
+            }
         }
+
+        return updateLines;
+        //return string.Join("\n",updateLines);
+    }
+
+    public static void AttachProfilesToIniFile(this List<FireFoxProfile> profiles)
+    {
+        if (!File.Exists(FireFoxProfileIniPath))
+            return;
+
+        var clearIni = RemoveAllIniProfiles();
+        foreach (var profile in profiles) 
+        {
+            if (clearIni.Last() != "")
+            {
+                clearIni.Add("");
+            }
+            clearIni.Add($"[{profile.Section}]");
+            clearIni.Add($"Name={profile.Name}");
+            clearIni.Add($"IsRelative={(profile.IsRelative ? 1 : 0)}");
+            clearIni.Add($"Path={profile.Path}");
+        }
+
+        File.WriteAllLines(FireFoxProfileIniPath, clearIni);
+
     }
 
 }

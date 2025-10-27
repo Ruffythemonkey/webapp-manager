@@ -51,7 +51,7 @@ namespace FoxyWebAppManager.Extensions
         }
 
         public static string GetWindowsLnkArguments(this (FireFoxMainFolder folder, TaskbarTab taskbarTab) data, Uri uri)
-           => $"\"-taskbar-tab\" \"{data.taskbarTab.id}\" \"-new-window\" \"{uri.Scheme}://{uri.DnsSafeHost}\" \"-profile\" \"{data.folder.ProfielPath}\" \"-container\" \"0\"";
+           => $"\"-taskbar-tab\" \"{data.taskbarTab.id}\" \"-new-window\" \"{uri.Scheme}://{uri.DnsSafeHost}\" \"-profile\" \"{data.folder.ProfilePath}\" \"-container\" \"0\"";
 
 
         /// <summary>

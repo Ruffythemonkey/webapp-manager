@@ -15,8 +15,7 @@ public partial class AppsViewModel : BaseViewModel
     [ObservableProperty]
     public partial FireFoxProfile SelectedProfil { get; set; }
 
-    [ObservableProperty]
-    public partial ObservableCollection<TaskbarTab> WebApps { get; set; } = [];
+    public ObservableCollection<TaskbarTab> WebApps { get; set; } = [];
 
     [ObservableProperty]
     public partial TaskbarTab SelectedWebApp { get; set; }

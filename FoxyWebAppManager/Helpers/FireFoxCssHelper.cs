@@ -12,12 +12,12 @@ namespace FoxyWebAppManager.Helpers
 
         public string PrefsPath
         {
-            get => Path.Combine(profile.GetMainFolder().ProfielPath, "prefs.js");
+            get => Path.Combine(profile.GetMainFolder().ProfilePath, "prefs.js");
         }
 
         public string UserChromeFile
         {
-            get => Path.Combine(profile.GetMainFolder().ProfielPath, @"chrome\userChrome.css");
+            get => Path.Combine(profile.GetMainFolder().ProfilePath, @"chrome\userChrome.css");
         }
 
         public bool UserChromeFileExist
