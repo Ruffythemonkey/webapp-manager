@@ -1,13 +1,5 @@
-﻿using System.Text.Json.Serialization;
-
-namespace FoxyWebAppManager.Models
+﻿namespace FoxyWebAppManager.Models
 {
-
-    [JsonSourceGenerationOptions(WriteIndented = true)]
-    [JsonSerializable(typeof(FireFoxTaskbarJson))]
-    internal partial class FireFoxTaskbarJsonContext : JsonSerializerContext
-    {
-    }
 
     public class FireFoxTaskbarJson
     {

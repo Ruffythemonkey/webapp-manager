@@ -189,7 +189,7 @@
   <data name="Rename.Description" xml:space="preserve">
     <value>Profil umbenennen</value>
   </data>
-  <data name="Renameb.Content" xml:space="preserve">
-    <value>Umbenennen</value>
+  <data name="RenameB.Content" xml:space="preserve">
+    <value>Änderung Speichern</value>
   </data>
 </root>

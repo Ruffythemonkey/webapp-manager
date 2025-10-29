@@ -53,8 +53,72 @@ namespace FoxyWebAppManager.Extensions
 
                 if (Directory.Exists(dir))
                 {
-                    Directory.Delete(dir,true);
+                    Directory.Delete(dir, true);
                 }
+            }
+
+            /// <summary>
+            /// prof is profile in use by parent.lock file is locked
+            /// </summary>
+            /// <returns></returns>
+            public bool IsProfileInUse()
+            {
+                var lockFile = profile.GetMainFolder().ParentLockFile;
+
+                if (!File.Exists(lockFile))
+                {
+                    // Lock-Datei fehlt → Profil sehr wahrscheinlich frei
+                    return false;
+                }
+
+                try
+                {
+                    // Versuche, die Datei exklusiv zu öffnen
+                    // FileShare.None verhindert andere Prozesse auf diese Datei zuzugreifen
+                    using var fs = new FileStream(lockFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+                    // Datei konnte geöffnet werden → Profil ist nicht in Benutzung
+                    return false;
+                }
+                catch (IOException)
+                {
+                    // Datei gesperrt → Profil wird von Firefox verwendet
+                    return true;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    // Zugriff verweigert → konservativ annehmen, dass Profil läuft
+                    return true;
+                }
+                catch
+                {
+                    // Andere Fehler → sicherheitshalber Profil als aktiv markieren
+                    return true;
+                }
+            }
+
+            /// <summary>
+            /// gives the folder of all Profiles
+            /// </summary>
+            /// <returns></returns>
+            public string GetProfileMainDirectory()
+                => new DirectoryInfo(profile.GetMainFolder().ProfilePath).Parent!.FullName;
+        }
+
+        extension(IEnumerable<FireFoxProfile> profiles)
+        {
+
+            /// <summary>
+            /// prof is profiles in use by parent.lock files is locked
+            /// </summary>
+            /// <returns></returns>
+            public Dictionary<FireFoxProfile, bool> IsProfilesInUse()
+            {
+                var ret = new Dictionary<FireFoxProfile, bool>();
+                
+                foreach (var item in profiles)
+                    ret.TryAdd(item, item.IsProfileInUse());
+                
+                return ret;
             }
         }
     }

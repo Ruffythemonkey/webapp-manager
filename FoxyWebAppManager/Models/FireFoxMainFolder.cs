@@ -15,9 +15,20 @@
             get => Path.Combine(ProfilePath, "taskbartabs", "taskbartabs.json");
         }
 
+        /// <summary>
+        /// Represent Taskbar Directory full path
+        /// </summary>
         public string TaskBarFolder
         {
             get => Path.Combine(ProfilePath, "taskbartabs");
+        }
+
+        /// <summary>
+        /// Represent parent.lock file fullpath
+        /// </summary>
+        public string ParentLockFile
+        {
+            get => Path.Combine(ProfilePath, "parent.lock");
         }
 
         public bool IsTaskbarTabsJsonExist

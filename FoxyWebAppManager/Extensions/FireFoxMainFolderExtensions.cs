@@ -11,7 +11,7 @@ namespace FoxyWebAppManager.Extensions
         {
             if (folder.IsTaskbarTabsJsonExist)
             {
-                return JsonSerializer.Deserialize<FireFoxTaskbarJson>(File.ReadAllText(folder.JsonFile), FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson)
+                return JsonSerializer.Deserialize<FireFoxTaskbarJson>(File.ReadAllText(folder.JsonFile))
                     ?? throw new FormatException();
             }
             return new FireFoxTaskbarJson();
@@ -44,7 +44,7 @@ namespace FoxyWebAppManager.Extensions
             }
             else { hostexist.startUrl = url.ToString(); }
 
-            var jstring = JsonSerializer.Serialize(json, FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson);
+            var jstring = JsonSerializer.Serialize(json);
             File.WriteAllText(folder.JsonFile, jstring);
 
             return (folder, hostexist);

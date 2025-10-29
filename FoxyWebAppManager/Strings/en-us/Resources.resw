@@ -190,6 +190,6 @@
     <value>Rename profile</value>
   </data>
   <data name="RenameB.Content" xml:space="preserve">
-    <value>Rename</value>
+    <value>Save changes</value>
   </data>
 </root>

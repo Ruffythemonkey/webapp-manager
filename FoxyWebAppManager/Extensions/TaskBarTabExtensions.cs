@@ -1,6 +1,5 @@
 ﻿using FoxyWebAppManager.Models;
 using Microsoft.Windows.Storage.Pickers;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace FoxyWebAppManager.Extensions
@@ -58,7 +57,7 @@ namespace FoxyWebAppManager.Extensions
                     var t = json.taskbarTabs.First(x => x.id == taskbarTab.id);
                     t.startUrl = taskbarTab.startUrl;
 
-                    var outputJsonString = JsonSerializer.Serialize(json, FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson);
+                    var outputJsonString = JsonSerializer.Serialize(json);
                     File.WriteAllText(profile.GetMainFolder().JsonFile, outputJsonString);
                 }
 

@@ -4,7 +4,6 @@ using FoxyWebAppManager.Extensions;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
 
-
 namespace FoxyWebAppManager.ViewModels;
 
 public partial class MainViewModel : BaseViewModel
@@ -25,7 +24,7 @@ public partial class MainViewModel : BaseViewModel
     public partial string FavIcon { get; set; } = "/Assets/WindowIcon.ico";
 
     [ObservableProperty]
-    public partial FireFoxData FireFoxData { get; set; } = FireFoxPathExtensions.GetSavedFireFoxData();
+    public partial FireFoxData FireFoxData { get; set; } = FireFoxDataExtensions.GetSavedFireFoxData();
 
     [ObservableProperty]
     public partial string WebHost { get; set; }

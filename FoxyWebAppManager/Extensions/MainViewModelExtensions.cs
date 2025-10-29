@@ -21,7 +21,7 @@ namespace FoxyWebAppManager.Extensions
                 if (file != null)
                 {
                     var ffd = new FireFoxData() { Path = file.Path };
-                    FireFoxPathExtensions.Save(ffd);
+                    ffd.Save();
                     viewModel.FireFoxData = ffd;
                 }
             }

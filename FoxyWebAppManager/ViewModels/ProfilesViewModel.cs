@@ -1,13 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FoxyWebAppManager.Collections;
-using FoxyWebAppManager.Extensions;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
-using System.Collections.ObjectModel;
 
 namespace FoxyWebAppManager.ViewModels;
 
-public partial class ProfilesViewModel : BaseViewModel
+public partial class ProfilesViewModel() : BaseViewModel
 {
 
     public RangeObservableCollection<FireFoxProfile> FireFoxProfiles { get; set; } = [];
@@ -15,16 +13,12 @@ public partial class ProfilesViewModel : BaseViewModel
     [ObservableProperty]
     public partial FireFoxProfile FireFoxProfileSelected { get; set; }
 
+    [ObservableProperty]
+    public partial string Watchlock {  get; set; }
 
-
-
-    public override void OnNavigatedFrom()
-    {
-        //throw new NotImplementedException();
-    }
+    public override void OnNavigatedFrom(){}
 
     public override void OnNavigatedTo(object parameter)
-      =>  FireFoxProfiles.AddRange(FireFoxIniParser.LoadProfilesFromInstalledFF());
-
+       => FireFoxProfiles.AddRange(FireFoxIniParser.LoadProfilesFromInstalledFF());
 
 }
