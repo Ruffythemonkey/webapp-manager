@@ -48,10 +48,7 @@ public partial class MainViewModel : BaseViewModel
     partial void OnWebHostChanged(string value)
       => _ = this.ChangeFavIconByWebHostChanged();
 
-    public override void OnNavigatedFrom()
-    {
-        //throw new NotImplementedException();
-    }
+    public override void OnNavigatedFrom(){}
 
     public override void OnNavigatedTo(object parameter)
         => FoxProfiles ??= FireFoxIniParser.LoadProfilesFromInstalledFF();

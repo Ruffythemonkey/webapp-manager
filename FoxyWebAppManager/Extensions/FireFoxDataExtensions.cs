@@ -12,7 +12,7 @@ namespace FoxyWebAppManager.Extensions
         extension(FireFoxData foxData)
         {
 
-            public void CreateProfile(string name)
+            public async Task CreateProfile(string name)
             {
                 using var p = new Process();
                 p.StartInfo.FileName = foxData.Path;
@@ -21,6 +21,7 @@ namespace FoxyWebAppManager.Extensions
                 p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 p.StartInfo.CreateNoWindow = true;
                 p.Start();
+                await p.WaitForExitAsync();
             }
 
             public void Save()

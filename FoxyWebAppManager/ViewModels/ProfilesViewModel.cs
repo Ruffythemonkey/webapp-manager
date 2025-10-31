@@ -1,20 +1,22 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
 using FoxyWebAppManager.Collections;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
+using FoxyWebAppManager.Extensions;
+using System.Threading.Tasks;
 
 namespace FoxyWebAppManager.ViewModels;
 
 public partial class ProfilesViewModel() : BaseViewModel
 {
-
     public RangeObservableCollection<FireFoxProfile> FireFoxProfiles { get; set; } = [];
 
-    [ObservableProperty]
-    public partial FireFoxProfile FireFoxProfileSelected { get; set; }
+    [RelayCommand]
+    private void RemoveProfileUI(FireFoxProfile foxProfile) => this.RemoveProfile(foxProfile);
 
-    [ObservableProperty]
-    public partial string Watchlock {  get; set; }
+    [RelayCommand]
+    private async Task CreateProfileUI() => await this.CreateProfile();
+
 
     public override void OnNavigatedFrom(){}
 

@@ -1,4 +1,5 @@
-﻿using FoxyWebAppManager.Helpers;
+﻿using CommunityToolkit.WinUI;
+using FoxyWebAppManager.Helpers;
 
 using Windows.UI.ViewManagement;
 
@@ -18,7 +19,7 @@ public sealed partial class MainWindow : WindowEx
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
         this.CenterOnScreen();
         Content = null;
-        Title = "AppDisplayName".GetLocalized();
+        Title = "AppDisplayName".GetLocalized()!;
 
         // Theme change code picked from https://github.com/microsoft/WinUI-Gallery/pull/1239
         dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();

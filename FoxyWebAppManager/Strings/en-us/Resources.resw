@@ -192,4 +192,16 @@
   <data name="RenameB.Content" xml:space="preserve">
     <value>Save changes</value>
   </data>
+  <data name="ProfilName.Header" xml:space="preserve">
+    <value>Profile Name</value>
+  </data>
+  <data name="ProfileNameInfoBar.Message" xml:space="preserve">
+    <value>If a profile already exists, this has no effect.  s</value>
+  </data>
+  <data name="ProfileCreateYes" xml:space="preserve">
+    <value>create Profile</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

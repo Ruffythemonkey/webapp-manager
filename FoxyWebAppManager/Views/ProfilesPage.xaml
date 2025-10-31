@@ -18,7 +18,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Button>
+
+        <Button Command="{x:Bind ViewModel.CreateProfileUICommand}">
             <TextBlock
                 x:Uid="CreateNewProfile"
                 Style="{StaticResource BodyLargeTextBlockStyle}" />
@@ -26,6 +27,11 @@
 
         <ScrollViewer Grid.Row="1">
             <ItemsRepeater ItemsSource="{x:Bind ViewModel.FireFoxProfiles, Mode=OneWay}">
+                <ItemsRepeater.Resources>
+                    <StandardUICommand
+                        x:Key="RemoveProfile"
+                        Command="{x:Bind ViewModel.RemoveProfileUICommand}" />
+                </ItemsRepeater.Resources>
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate
                         xmlns:p="using:FoxyWebAppManager.Models"
@@ -59,7 +65,9 @@
                                                              Glyph=&#xECC9;}">
                                     <Button
                                         x:Uid="Delete"
-                                        Background="Red" />
+                                        Background="Red"
+                                        Command="{StaticResource RemoveProfile}"
+                                        CommandParameter="{x:Bind}" />
                                 </cc:SettingsCard>
 
                             </cc:SettingsExpander.Items>
@@ -68,6 +76,8 @@
                 </ItemsRepeater.ItemTemplate>
             </ItemsRepeater>
         </ScrollViewer>
+
+
 
 
 

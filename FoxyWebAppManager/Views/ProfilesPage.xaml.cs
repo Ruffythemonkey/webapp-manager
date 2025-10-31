@@ -1,5 +1,8 @@
-﻿using FoxyWebAppManager.ViewModels;
-
+﻿using CommunityToolkit.WinUI;
+using FoxyWebAppManager.ContentDialogs;
+using FoxyWebAppManager.Extensions;
+using FoxyWebAppManager.Models;
+using FoxyWebAppManager.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
 namespace FoxyWebAppManager.Views;
@@ -16,4 +19,7 @@ public sealed partial class ProfilesPage : Page
         ViewModel = App.GetService<ProfilesViewModel>();
         InitializeComponent();
     }
+
+
+
 }

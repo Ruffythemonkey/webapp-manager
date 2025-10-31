@@ -19,7 +19,7 @@ public static class FireFoxIniParser
         if (File.Exists(FireFoxProfileIniPath))
             return LoadProfiles(FireFoxProfileIniPath);
         
-        return new List<FireFoxProfile>();
+        return [];
     }
 
     public static List<FireFoxProfile> LoadProfiles(string file)
@@ -51,7 +51,7 @@ public static class FireFoxIniParser
 
                 if (key == "name") current.Name = value;
                 if (key == "path") current.Path = value;
-                if (key == "isrelative") current.IsRelative = value == "1" ? true : false;
+                if (key == "isrelative") current.IsRelative = value == "1";
             }
         }
 
@@ -90,6 +90,10 @@ public static class FireFoxIniParser
         //return string.Join("\n",updateLines);
     }
 
+    /// <summary>
+    /// Modify the profiles Ini so that only those that are already present remain.
+    /// </summary>
+    /// <param name="profiles"></param>
     public static void AttachProfilesToIniFile(this List<FireFoxProfile> profiles)
     {
         if (!File.Exists(FireFoxProfileIniPath))

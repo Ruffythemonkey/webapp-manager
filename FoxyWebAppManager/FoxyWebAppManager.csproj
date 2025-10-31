@@ -28,6 +28,11 @@
 
 
 	<ItemGroup>
+	  <None Remove="ContentDialogs\DialogRenameProfile.xaml" />
+	</ItemGroup>
+
+
+	<ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 
@@ -60,6 +65,12 @@
 
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ContentDialogs\DialogRenameProfile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

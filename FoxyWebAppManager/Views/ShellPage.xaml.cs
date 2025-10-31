@@ -1,4 +1,5 @@
-﻿using FoxyWebAppManager.Contracts.Services;
+﻿using CommunityToolkit.WinUI;
+using FoxyWebAppManager.Contracts.Services;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.ViewModels;
 
