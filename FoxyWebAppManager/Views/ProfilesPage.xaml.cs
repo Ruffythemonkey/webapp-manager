@@ -1,8 +1,4 @@
-﻿using CommunityToolkit.WinUI;
-using FoxyWebAppManager.ContentDialogs;
-using FoxyWebAppManager.Extensions;
-using FoxyWebAppManager.Models;
-using FoxyWebAppManager.ViewModels;
+﻿using FoxyWebAppManager.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
 namespace FoxyWebAppManager.Views;

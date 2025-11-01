@@ -1,3 +1,4 @@
+using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -15,8 +16,25 @@ namespace FoxyWebAppManager.ContentDialogs
             InitializeComponent();
         }
 
-        public string ProfileName { get; set; } = string.Empty;
-    
+        public ContentDialog ContentDialog
+        {
+            get 
+            {
+                if (field == null)
+                {
+                    field = new ContentDialog()
+                    {
+                        PrimaryButtonText = "ProfileCreateYes".GetLocalized(),
+                        SecondaryButtonText = "Cancel".GetLocalized(),
+                        XamlRoot = App.MainWindow.Content.XamlRoot,
+                        Content = this
+                    };
+                }
+                return field;
+            }
+        }
+
+
     }
 
 }

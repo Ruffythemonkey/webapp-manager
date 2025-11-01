@@ -51,7 +51,7 @@ public partial class MainViewModel : BaseViewModel
     public override void OnNavigatedFrom(){}
 
     public override void OnNavigatedTo(object parameter)
-        => FoxProfiles ??= FireFoxIniParser.LoadProfilesFromInstalledFF();
+        => FoxProfiles =Helpers.FireFoxIniParser.LoadProfilesFromInstalledFF();
 
     partial void OnSelectedFireFoxProfileChanged(FireFoxProfile value) 
         => IsCustomizeUserStyle = new FireFoxCssHelper(SelectedFireFoxProfile).IsUserChromeActive;

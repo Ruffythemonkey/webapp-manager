@@ -41,7 +41,7 @@
                             Header="{x:Bind Name}">
                             <cc:SettingsExpander.Items>
 
-                                <cc:SettingsCard
+                                <!--<cc:SettingsCard
                                     x:Uid="Rename"
                                     HeaderIcon="{ui:FontIcon Glyph=&#xE8AC;}">
 
@@ -57,7 +57,8 @@
                                             Style="{StaticResource AccentButtonStyle}" />
                                     </StackPanel>
 
-                                </cc:SettingsCard>
+                                </cc:SettingsCard>-->
+
 
                                 <cc:SettingsCard
                                     x:Uid="Remove"
@@ -65,9 +66,9 @@
                                                              Glyph=&#xECC9;}">
                                     <Button
                                         x:Uid="Delete"
-                                        Background="Red"
                                         Command="{StaticResource RemoveProfile}"
-                                        CommandParameter="{x:Bind}" />
+                                        CommandParameter="{x:Bind}"
+                                        Style="{StaticResource AccentButtonStyle}" />
                                 </cc:SettingsCard>
 
                             </cc:SettingsExpander.Items>

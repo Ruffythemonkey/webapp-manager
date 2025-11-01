@@ -196,12 +196,18 @@
     <value>Profile Name</value>
   </data>
   <data name="ProfileNameInfoBar.Message" xml:space="preserve">
-    <value>If a profile already exists, this has no effect.  s</value>
+    <value>If a profile with the same name already exists, this has no effect.</value>
   </data>
   <data name="ProfileCreateYes" xml:space="preserve">
     <value>create Profile</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="ProfileRemoveYes" xml:space="preserve">
+    <value>Remove Profile</value>
+  </data>
+  <data name="ProfileRemove.Message" xml:space="preserve">
+    <value>Do you really want to delete the profile? All data will be irrevocably deleted!</value>
   </data>
 </root>

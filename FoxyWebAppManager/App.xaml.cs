@@ -1,6 +1,5 @@
 ﻿using FoxyWebAppManager.Activation;
 using FoxyWebAppManager.Contracts.Services;
-using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Services;
 using FoxyWebAppManager.ViewModels;
 using FoxyWebAppManager.Views;

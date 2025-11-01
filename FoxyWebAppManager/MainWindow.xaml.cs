@@ -15,15 +15,16 @@ public sealed partial class MainWindow : WindowEx
     {
         InitializeComponent();
 
-        //AppWindow.SetTaskbarIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
-        AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
+        AppWindow.SetTaskbarIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
+
         this.CenterOnScreen();
-        Content = null;
+        this.Content = null;
         Title = "AppDisplayName".GetLocalized()!;
 
         // Theme change code picked from https://github.com/microsoft/WinUI-Gallery/pull/1239
         dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
         settings = new UISettings();
+    
         settings.ColorValuesChanged += Settings_ColorValuesChanged; // cannot use FrameworkElement.ActualThemeChanged event
     }
 
@@ -37,4 +38,5 @@ public sealed partial class MainWindow : WindowEx
             TitleBarHelper.ApplySystemThemeToCaptionButtons();
         });
     }
+
 }

@@ -1,59 +1,54 @@
-﻿using CommunityToolkit.WinUI;
-using FoxyWebAppManager.ContentDialogs;
+﻿using FoxyWebAppManager.ContentDialogs;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
 using FoxyWebAppManager.ViewModels;
 using Microsoft.UI.Xaml.Controls;
+using System.Threading.Tasks;
 namespace FoxyWebAppManager.Extensions
 {
     public static class ProfilesViewModelExtensions
     {
         extension(ProfilesViewModel vm)
         {
-            public void RemoveProfile(FireFoxProfile profile)
+            public async Task RemoveProfile(FireFoxProfile profile)
             {
-                var allProfiles = FireFoxIniParser
+                ContentDialog dialog = new DialogRemoveProfile().ContentDialog;
+
+                if (await dialog.ShowAsync() == ContentDialogResult.Secondary)
+                {
+                    return;
+                }
+
+
+                //loads all Profiles and gives a List without the one removing Profile
+                var keepProfiles = FireFoxIniParser
                     .LoadProfilesFromInstalledFF()
-                    .Where(x=> !x.Equals(profile))
+                    .Where(x => !x.Equals(profile))
                     .ToList();
 
-                allProfiles.AttachProfilesToIniFile();
+                //write the FirefoxProfile.ini
+                keepProfiles.AttachProfilesToIniFile();
+                //Remove the selected FF Profile
                 profile.RemoveProfileFolder();
 
-                vm.FireFoxProfiles.Clear();
-                vm.FireFoxProfiles.AddRange(allProfiles);
+                vm.FireFoxProfiles.ReloadFireFoxProfiles();
             }
 
             public async Task CreateProfile()
             {
-                ContentDialog dialog = new ContentDialog()
-                {
-                    PrimaryButtonText = "ProfileCreateYes".GetLocalized(),
-                    SecondaryButtonText = "Cancel".GetLocalized(),
-                    XamlRoot = App.MainWindow.Content.XamlRoot,
-                    Content = new DialogRenameProfile()
-                };
+                ContentDialog dialog = new DialogRenameProfile().ContentDialog;
 
                 if (await dialog.ShowAsync() == ContentDialogResult.Primary
-                    && dialog.Content is DialogRenameProfile profile
-                    && profile.ProfileName is string str
+                    && dialog.Tag is string str
                     && !string.IsNullOrWhiteSpace(str))
-                {
+                {   
+                    //Create Process =>
                     str = str.Trim();
                     var p = FireFoxDataExtensions.GetSavedFireFoxData();
                     if (p is FireFoxData fire)
                     {
-                       await fire.CreateProfile(str);
-
-                        vm._dispatcherQueue.TryEnqueue(() => 
-                        {
-                            vm.FireFoxProfiles.Clear();
-                            vm
-                            .FireFoxProfiles
-                            .AddRange(FireFoxIniParser.LoadProfilesFromInstalledFF());
-                        });
-                        
-
+                        await fire.CreateProfile(str);
+                        vm.FireFoxProfiles.ReloadFireFoxProfiles(vm._dispatcherQueue);
                     }
                 }
             }

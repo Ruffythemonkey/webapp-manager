@@ -196,12 +196,18 @@
     <value>Name des Profil</value>
   </data>
   <data name="ProfileNameInfoBar.Message" xml:space="preserve">
-    <value>Wenn ein Profil schon besteht hat das keine Auswirkung</value>
+    <value>Falls ein Profil mit demselben Namen bereits besteht, hat das keine Auswirkung.</value>
   </data>
   <data name="ProfileCreateYes" xml:space="preserve">
     <value>Profil erzeugen</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Abbrechen</value>
+  </data>
+  <data name="ProfileRemoveYes" xml:space="preserve">
+    <value>Profil Löschen</value>
+  </data>
+  <data name="ProfileRemove.Message" xml:space="preserve">
+    <value>Willst du wirklich das Profil löschen, dabei werden alle Daten un­wi­der­ruf­lich gelöscht!</value>
   </data>
 </root>

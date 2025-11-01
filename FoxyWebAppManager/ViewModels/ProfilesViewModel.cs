@@ -12,7 +12,7 @@ public partial class ProfilesViewModel() : BaseViewModel
     public RangeObservableCollection<FireFoxProfile> FireFoxProfiles { get; set; } = [];
 
     [RelayCommand]
-    private void RemoveProfileUI(FireFoxProfile foxProfile) => this.RemoveProfile(foxProfile);
+    private async Task RemoveProfileUI(FireFoxProfile foxProfile) => await this.RemoveProfile(foxProfile);
 
     [RelayCommand]
     private async Task CreateProfileUI() => await this.CreateProfile();

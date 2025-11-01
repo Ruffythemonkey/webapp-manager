@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.UI.Dispatching;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 namespace FoxyWebAppManager.Collections
@@ -20,6 +21,33 @@ namespace FoxyWebAppManager.Collections
             _suppressNotification = false;
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
+
+        /// <summary>
+        /// Clear Collection and add them new Items
+        /// </summary>
+        /// <param name="items"></param>
+        public void ClearAndAdd(IEnumerable<T> items)
+        {
+            this.Clear();
+            this.AddRange(items);
+        }
+
+        /// <summary>
+        /// async dispatcher operation
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="queue"></param>
+        public void AddRange(IEnumerable<T> items, DispatcherQueue queue)
+          => queue.TryEnqueue(() => this.AddRange(items));
+
+        /// <summary>
+        /// async dispatcher operation
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="queue"></param>
+        public void ClearAndAdd(IEnumerable<T> items, DispatcherQueue queue)
+          => queue.TryEnqueue(() => this.ClearAndAdd(items));
+
 
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {

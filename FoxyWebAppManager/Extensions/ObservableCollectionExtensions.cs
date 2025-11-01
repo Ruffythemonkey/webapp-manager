@@ -1,25 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FoxyWebAppManager.Collections;
+using FoxyWebAppManager.Models;
+using Microsoft.UI.Dispatching;
 
 namespace FoxyWebAppManager.Extensions
 {
     public static class ObservableCollectionExtensions
     {
-     
-        public static void AddRange<T>(this ObservableCollection<T> values,IEnumerable<T> list)
+        extension(RangeObservableCollection<FireFoxProfile> profiles)
         {
-            values.Clear();
-            foreach (var item in list)
-            {
-                values.Add(item);
-            }
+            /// <summary>
+            /// Reload FireFox Profiles in this Collection, clears before
+            /// </summary>
+            public void ReloadFireFoxProfiles()
+                  => profiles.ClearAndAdd(Helpers.FireFoxIniParser.LoadProfilesFromInstalledFF());
+
+            /// <summary>
+            /// Reload FireFox Profiles in this Collection, clears before. And uses 
+            /// DispatcherQueue in async Operations
+            /// </summary>
+            /// <param name="queue"></param>
+            public void ReloadFireFoxProfiles(DispatcherQueue queue)
+                => queue.TryEnqueue(() => profiles.ReloadFireFoxProfiles());
         }
-
-
 
     }
 }

@@ -11,30 +11,39 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="32" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="24" />
+            <RowDefinition Height="32" />
         </Grid.RowDefinitions>
-        <Grid
-            x:Name="AppTitleBar"
-            Margin="28,0,0,0"
-            VerticalAlignment="Top"
-            Canvas.ZIndex="1"
-            IsHitTestVisible="True">
-            <!--<Image
-                Margin="0 12 0 0"
-                Width="24"
-                Height="24"
-                HorizontalAlignment="Left"
-                Source="/Assets/WindowIcon.ico" />-->
-            <TextBlock
-                x:Name="AppTitleBarText"
-                Margin="0,12,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Style="{StaticResource CaptionTextBlockStyle}"
-                TextWrapping="NoWrap" />
+        <Grid x:Name="AppTitleBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    x:Name="LeftPaddingColumn"
+                    Width="150" />
+                <ColumnDefinition />
+                <ColumnDefinition
+                    x:Name="RightPaddingColumn"
+                    Width="150" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Text="FoxyWebAppManager" />
+                <Button
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="ToggleSwitch_Toggled">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE793;" />
+                    </Button.Content>
+                </Button>
+            </Grid>
         </Grid>
+
         <NavigationView
             x:Name="NavigationViewControl"
             Grid.Row="1"
@@ -73,9 +82,13 @@
                             Glyph="&#xE71D;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Profiles" helpers:NavigationHelper.NavigateTo="FoxyWebAppManager.ViewModels.ProfilesViewModel">
+                <NavigationViewItem
+                    x:Uid="Shell_Profiles"
+                    helpers:NavigationHelper.NavigateTo="FoxyWebAppManager.ViewModels.ProfilesViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE716;"/>
+                        <FontIcon
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xE716;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -113,6 +126,19 @@
             <Run Text="You can find this Project under" />
             <Hyperlink NavigateUri="https://github.com/Ruffythemonkey/webapp-manager">github</Hyperlink>
         </TextBlock>
+
+        <!--<ToggleSwitch
+            Grid.Row="2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Toggled="ToggleSwitch_Toggled">
+            <ToggleSwitch.OnContent>
+                <FontIcon Glyph="&#xE706;" />
+            </ToggleSwitch.OnContent>
+            <ToggleSwitch.OffContent>
+                <FontIcon Glyph="&#xE793;" />
+            </ToggleSwitch.OffContent>
+        </ToggleSwitch>-->
 
     </Grid>
 </Page>
