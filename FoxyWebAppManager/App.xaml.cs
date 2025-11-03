@@ -1,12 +1,15 @@
 ﻿using FoxyWebAppManager.Activation;
 using FoxyWebAppManager.Contracts.Services;
+using FoxyWebAppManager.Extensions;
 using FoxyWebAppManager.Services;
 using FoxyWebAppManager.ViewModels;
 using FoxyWebAppManager.Views;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+
+
+
 
 namespace FoxyWebAppManager;
 
@@ -41,6 +44,8 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
+
+        this.RequestedTheme = AppSettingsExtensions.Load().ElementTheme.GetApplicationThemeFromElementTheme();
 
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().

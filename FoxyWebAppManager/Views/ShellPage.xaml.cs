@@ -1,13 +1,10 @@
-﻿using CommunityToolkit.WinUI;
-using FoxyWebAppManager.Contracts.Services;
+﻿using FoxyWebAppManager.Contracts.Services;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.ViewModels;
 using FoxyWebAppManager.Extensions;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-
 using Windows.System;
 
 namespace FoxyWebAppManager.Views;
@@ -33,11 +30,12 @@ public sealed partial class ShellPage : Page
         // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
+        
     }
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        TitleBarHelper.UpdateTitleBar(RequestedTheme);
+        TitleBarHelper.UpdateTitleBar(AppSettingsExtensions.Load().ElementTheme);
 
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
@@ -70,11 +68,11 @@ public sealed partial class ShellPage : Page
 
     private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
     {
-            if (App.MainWindow.Content is FrameworkElement element)
-            {
-                element.RequestedTheme = element.ActualTheme.ToggleTheme();
-
-                Helpers.TitleBarHelper.UpdateTitleBar(element.RequestedTheme);
+        if (App.MainWindow.Content is FrameworkElement element)
+        {
+            element.RequestedTheme = element.ActualTheme.ToggleTheme();
+            AppSettingsExtensions.Load().ElementTheme = element.ActualTheme;
+            Helpers.TitleBarHelper.UpdateTitleBar(element.RequestedTheme);
         }
     }
 }
