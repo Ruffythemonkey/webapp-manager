@@ -1,6 +1,6 @@
 ﻿using FoxyWebAppManager.Activation;
 using FoxyWebAppManager.Contracts.Services;
-using FoxyWebAppManager.Extensions;
+using FoxyWebAppManager.Models;
 using FoxyWebAppManager.Services;
 using FoxyWebAppManager.ViewModels;
 using FoxyWebAppManager.Views;
@@ -37,9 +37,11 @@ public partial class App : Application
         return service;
     }
 
-    public static WindowEx MainWindow { get; } = new MainWindow();
+    public static WindowEx MainWindow { get; } 
+        = new MainWindow();
 
-    public static UIElement? AppTitlebar { get; set; }
+    public static AppSettings Settings { get; } 
+        = Extensions.AppSettingsExtensions.GetSettings;
 
     public App()
     {

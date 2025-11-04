@@ -1,7 +1,6 @@
 ﻿using FoxyWebAppManager.Contracts.Services;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.ViewModels;
-using FoxyWebAppManager.Extensions;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -30,13 +29,13 @@ public sealed partial class ShellPage : Page
         // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
-        this.RequestedTheme = AppSettingsExtensions.GetSettings.ElementTheme;
+        this.RequestedTheme = App.Settings.ElementTheme;
         
     }
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        TitleBarHelper.UpdateTitleBar(AppSettingsExtensions.GetSettings.ElementTheme);
+        TitleBarHelper.UpdateTitleBar(App.Settings.ElementTheme);
 
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));

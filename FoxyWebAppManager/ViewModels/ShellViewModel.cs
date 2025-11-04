@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FoxyWebAppManager.Contracts.Services;
-using FoxyWebAppManager.Extensions;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
 
@@ -17,7 +16,7 @@ public partial class ShellViewModel : ObservableRecipient
     public List<string> Themes { get; set; } = Enum.GetNames(typeof(ElementTheme)).ToList();
 
     [ObservableProperty]
-    public partial string SelectedTheme { get; set; } = AppSettingsExtensions.GetSettings.ElementTheme.ToString();
+    public partial string SelectedTheme { get; set; } = App.Settings.ElementTheme.ToString();
 
     public INavigationService NavigationService
     {
@@ -58,7 +57,7 @@ public partial class ShellViewModel : ObservableRecipient
                 _ => ElementTheme.Default
             };
             Helpers.TitleBarHelper.UpdateTitleBar(element.RequestedTheme);
-            AppSettingsExtensions.GetSettings.ElementTheme = element.RequestedTheme;
+            App.Settings.ElementTheme = element.RequestedTheme;
         }
     }
 

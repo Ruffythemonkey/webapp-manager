@@ -27,6 +27,7 @@ namespace FoxyWebAppManager.ContentDialogs
                         PrimaryButtonText = "ProfileCreateYes".GetLocalized(),
                         SecondaryButtonText = "Cancel".GetLocalized(),
                         XamlRoot = App.MainWindow.Content.XamlRoot,
+                        RequestedTheme = App.Settings.ElementTheme,
                         Content = this
                     };
                 }
