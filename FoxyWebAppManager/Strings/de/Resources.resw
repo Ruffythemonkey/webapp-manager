@@ -210,4 +210,10 @@
   <data name="ProfileRemove.Message" xml:space="preserve">
     <value>Willst du wirklich das Profil löschen, dabei werden alle Daten un­wi­der­ruf­lich gelöscht!</value>
   </data>
+  <data name="Theme.Title" xml:space="preserve">
+    <value>Modus wählen</value>
+  </data>
+  <data name="Theme.Subtitle" xml:space="preserve">
+    <value>Ändern sie die Farbe, die in Foxy Web-App Manager angezeigt werden soll</value>
+  </data>
 </root>

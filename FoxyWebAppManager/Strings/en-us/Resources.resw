@@ -210,4 +210,10 @@
   <data name="ProfileRemove.Message" xml:space="preserve">
     <value>Do you really want to delete the profile? All data will be irrevocably deleted!</value>
   </data>
+  <data name="Theme.Title" xml:space="preserve">
+    <value>Change Modi</value>
+  </data>
+  <data name="Theme.Subtitle" xml:space="preserve">
+    <value>Change the color that should be displayed in Foxy Web-App Manager.</value>
+  </data>
 </root>

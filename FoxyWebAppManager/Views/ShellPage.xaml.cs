@@ -30,18 +30,17 @@ public sealed partial class ShellPage : Page
         // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
+        this.RequestedTheme = AppSettingsExtensions.GetSettings.ElementTheme;
         
     }
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        TitleBarHelper.UpdateTitleBar(AppSettingsExtensions.Load().ElementTheme);
+        TitleBarHelper.UpdateTitleBar(AppSettingsExtensions.GetSettings.ElementTheme);
 
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
     }
-
-
 
     private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)
     {
@@ -66,13 +65,6 @@ public sealed partial class ShellPage : Page
         args.Handled = result;
     }
 
-    private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-    {
-        if (App.MainWindow.Content is FrameworkElement element)
-        {
-            element.RequestedTheme = element.ActualTheme.ToggleTheme();
-            AppSettingsExtensions.Load().ElementTheme = element.ActualTheme;
-            Helpers.TitleBarHelper.UpdateTitleBar(element.RequestedTheme);
-        }
-    }
+    private void ThemeButton_Click(object sender, RoutedEventArgs e)
+       => ThemeTeachingTip.IsOpen = true;
 }

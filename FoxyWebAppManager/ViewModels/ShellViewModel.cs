@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FoxyWebAppManager.Contracts.Services;
+using FoxyWebAppManager.Extensions;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace FoxyWebAppManager.ViewModels;
@@ -10,7 +12,12 @@ public partial class ShellViewModel : ObservableRecipient
     public partial bool IsBackEnabled { get; set; }
 
     [ObservableProperty]
-    public partial object? Selected {  get; set; }
+    public partial object? Selected { get; set; }
+
+    public List<string> Themes { get; set; } = Enum.GetNames(typeof(ElementTheme)).ToList();
+
+    [ObservableProperty]
+    public partial string SelectedTheme { get; set; } = AppSettingsExtensions.GetSettings.ElementTheme.ToString();
 
     public INavigationService NavigationService
     {
@@ -38,4 +45,21 @@ public partial class ShellViewModel : ObservableRecipient
             Selected = selectedItem;
         }
     }
+
+    partial void OnSelectedThemeChanged(string value)
+    {
+        if (!string.IsNullOrEmpty(value) && App.MainWindow.Content is FrameworkElement element)
+        {
+            element.RequestedTheme = value switch
+            {
+                "Light" => ElementTheme.Light,
+                "Dark" => ElementTheme.Dark,
+                "Default" => ElementTheme.Default,
+                _ => ElementTheme.Default
+            };
+            Helpers.TitleBarHelper.UpdateTitleBar(element.RequestedTheme);
+            AppSettingsExtensions.GetSettings.ElementTheme = element.RequestedTheme;
+        }
+    }
+
 }

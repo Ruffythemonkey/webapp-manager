@@ -45,8 +45,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        this.RequestedTheme = AppSettingsExtensions.Load().ElementTheme.GetApplicationThemeFromElementTheme();
-
         Host = Microsoft.Extensions.Hosting.Host.
         CreateDefaultBuilder().
         UseContentRoot(AppContext.BaseDirectory).

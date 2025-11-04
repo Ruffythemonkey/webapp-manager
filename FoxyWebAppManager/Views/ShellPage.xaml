@@ -32,15 +32,31 @@
                     VerticalAlignment="Center"
                     Text="FoxyWebAppManager" />
                 <Button
+                    x:Name="ThemeButton"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Background="Transparent"
                     BorderThickness="0"
-                    Click="ToggleSwitch_Toggled">
+                    Click="ThemeButton_Click">
                     <Button.Content>
                         <FontIcon Glyph="&#xE793;" />
                     </Button.Content>
                 </Button>
+                <TeachingTip
+                    x:Name="ThemeTeachingTip"
+                    x:Uid="Theme"
+                    IsLightDismissEnabled="True"
+                    Target="{x:Bind ThemeButton}">
+                    <TeachingTip.IconSource>
+                        <FontIconSource Glyph="&#xE771;" />
+                    </TeachingTip.IconSource>
+                    <RadioButtons
+                        ItemsSource="{x:Bind ViewModel.Themes}"
+                        MaxColumns="1"
+                        SelectedItem="{x:Bind ViewModel.SelectedTheme, Mode=TwoWay}" />
+                </TeachingTip>
+
+
             </Grid>
         </Grid>
 

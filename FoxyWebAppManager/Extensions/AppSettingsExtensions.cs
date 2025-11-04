@@ -6,6 +6,8 @@ namespace FoxyWebAppManager.Extensions
     {
         private static AppSettings? _instance = null!;
 
+        public static AppSettings GetSettings { get => Load(); }
+
         /// <summary>
         /// Save All Application Data 
         /// </summary>
@@ -17,7 +19,7 @@ namespace FoxyWebAppManager.Extensions
         /// Load All Application Data
         /// </summary>
         /// <returns></returns>
-        public static AppSettings Load()
+        private static AppSettings Load()
             => _instance ?? LocalDataAppPath.Read<AppSettings>() ?? new AppSettings();
     }
 }
