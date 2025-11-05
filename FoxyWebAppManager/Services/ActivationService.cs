@@ -1,9 +1,9 @@
 ﻿using FoxyWebAppManager.Activation;
 using FoxyWebAppManager.Contracts.Services;
 using FoxyWebAppManager.Views;
-
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+
 
 namespace FoxyWebAppManager.Services;
 

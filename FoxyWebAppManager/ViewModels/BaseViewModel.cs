@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FoxyWebAppManager.Contracts.ViewModels;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml.Controls;
+using System.Security.AccessControl;
+using System.Windows.Input;
 
 namespace FoxyWebAppManager.ViewModels
 {

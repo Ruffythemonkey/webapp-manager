@@ -13,7 +13,7 @@
 	<Nullable>enable</Nullable>
 	<UseWinUI>true</UseWinUI>
 	<LangVersion>preview</LangVersion>
-    <EnableMsixTooling>true</EnableMsixTooling>
+    <EnableMsixTooling>false</EnableMsixTooling>
 	<WindowsPackageType>None</WindowsPackageType>
 	<DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
@@ -21,8 +21,17 @@
 
 	<PropertyGroup>
 		<NoWarn>$(NoWarn);CS0612</NoWarn>
-		<Version>1.0.5</Version>
+		<NoWarn>$(NoWarn);CA1822</NoWarn>
+		<NoWarn>$(NoWarn);IDE1006</NoWarn>
+		<Version>1.1.0</Version>
 	</PropertyGroup>
+
+
+	<ItemGroup>
+	  <None Remove="ContentDialogs\DialogException.xaml" />
+	  <None Remove="ContentDialogs\DialogRemoveProfile.xaml" />
+	  <None Remove="ContentDialogs\DialogRenameProfile.xaml" />
+	</ItemGroup>
 
 
 	<ItemGroup>
@@ -35,6 +44,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.2.250402" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251003001" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.0" />
@@ -43,6 +53,7 @@
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="TLDExtractor" Version="1.0.2" />
     <PackageReference Include="WinUIEx" Version="2.9.0" />
+    <!--<PackageReference Include="WinUIEx" Version="2.9.0" />-->
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +68,24 @@
 
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ContentDialogs\DialogException.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ContentDialogs\DialogRemoveProfile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ContentDialogs\DialogRenameProfile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

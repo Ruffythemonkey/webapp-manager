@@ -1,8 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media;
 
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -23,6 +21,7 @@ internal class TitleBarHelper
 
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     private static extern IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
+
 
     public static void UpdateTitleBar(ElementTheme theme)
     {
@@ -71,24 +70,23 @@ internal class TitleBarHelper
 
             App.MainWindow.AppWindow.TitleBar.BackgroundColor = Colors.Transparent;
 
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
-            if (hwnd == GetActiveWindow())
-            {
-                SendMessage(hwnd, WMACTIVATE, WAINACTIVE, IntPtr.Zero);
-                SendMessage(hwnd, WMACTIVATE, WAACTIVE, IntPtr.Zero);
-            }
-            else
-            {
-                SendMessage(hwnd, WMACTIVATE, WAACTIVE, IntPtr.Zero);
-                SendMessage(hwnd, WMACTIVATE, WAINACTIVE, IntPtr.Zero);
-            }
+            //var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+            //if (hwnd == GetActiveWindow())
+            //{
+            //    SendMessage(hwnd, WMACTIVATE, WAINACTIVE, IntPtr.Zero);
+            //    SendMessage(hwnd, WMACTIVATE, WAACTIVE, IntPtr.Zero);
+            //}
+            //else
+            //{
+            //    SendMessage(hwnd, WMACTIVATE, WAACTIVE, IntPtr.Zero);
+            //    SendMessage(hwnd, WMACTIVATE, WAINACTIVE, IntPtr.Zero);
+            //}
         }
     }
 
     public static void ApplySystemThemeToCaptionButtons()
     {
-        var frame = App.AppTitlebar as FrameworkElement;
-        if (frame != null)
+        if (App.MainWindow.Content is FrameworkElement frame)
         {
             UpdateTitleBar(frame.ActualTheme);
         }

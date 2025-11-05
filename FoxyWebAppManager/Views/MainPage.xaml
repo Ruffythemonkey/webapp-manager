@@ -67,8 +67,8 @@
             </CheckBox>
             <Button
                 x:Uid="Save"
-                Style="{StaticResource AccentButtonStyle}"
-                Command="{x:Bind ViewModel.SaveWebAppCommand}" />
+                Command="{x:Bind ViewModel.SaveWebAppCommand}"
+                Style="{StaticResource AccentButtonStyle}" />
         </StackPanel>
 
 

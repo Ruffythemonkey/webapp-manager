@@ -3,11 +3,15 @@ using FoxyWebAppManager.Models;
 using FoxyWebAppManager.Extensions;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using Microsoft.UI.Xaml;
 
 namespace FoxyWebAppManager.ViewModels;
 
 public partial class AppsViewModel : BaseViewModel
 {
+
+    public static Visibility IsWebAppEditShow(ObservableCollection<TaskbarTab> tabs)
+        => tabs.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
 
     [ObservableProperty]
     public partial List<FireFoxProfile> FoxProfiles { get; set; }
@@ -15,8 +19,7 @@ public partial class AppsViewModel : BaseViewModel
     [ObservableProperty]
     public partial FireFoxProfile SelectedProfil { get; set; }
 
-    [ObservableProperty]
-    public partial ObservableCollection<TaskbarTab> WebApps { get; set; } = [];
+    public ObservableCollection<TaskbarTab> WebApps { get; set; } = [];
 
     [ObservableProperty]
     public partial TaskbarTab SelectedWebApp { get; set; }
@@ -33,6 +36,7 @@ public partial class AppsViewModel : BaseViewModel
     [RelayCommand]
     private void RemoveWebAppUi(TaskbarTab item) => this.RemoveWebApp(item, SelectedProfil);
 
+    //Todo: Bug, wenn null
     partial void OnFoxProfilesChanged(List<FireFoxProfile> value)
          => _dispatcherQueue.TryEnqueue(() => SelectedProfil = value.FirstOrDefault()!);
 

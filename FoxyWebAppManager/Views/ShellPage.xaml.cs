@@ -1,12 +1,9 @@
 ﻿using FoxyWebAppManager.Contracts.Services;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.ViewModels;
-
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-
 using Windows.System;
 
 namespace FoxyWebAppManager.Views;
@@ -32,32 +29,16 @@ public sealed partial class ShellPage : Page
         // https://docs.microsoft.com/windows/apps/develop/title-bar?tabs=winui3#full-customization
         App.MainWindow.ExtendsContentIntoTitleBar = true;
         App.MainWindow.SetTitleBar(AppTitleBar);
-        App.MainWindow.Activated += MainWindow_Activated;
-        AppTitleBarText.Text = "AppDisplayName".GetLocalized();
+        this.RequestedTheme = App.Settings.ElementTheme;
+        
     }
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        TitleBarHelper.UpdateTitleBar(RequestedTheme);
+        TitleBarHelper.UpdateTitleBar(App.Settings.ElementTheme);
 
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu));
         KeyboardAccelerators.Add(BuildKeyboardAccelerator(VirtualKey.GoBack));
-    }
-
-    private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
-    {
-        App.AppTitlebar = AppTitleBarText as UIElement;
-    }
-
-    private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
-    {
-        AppTitleBar.Margin = new Thickness()
-        {
-            //Left = sender.CompactPaneLength * (sender.DisplayMode == NavigationViewDisplayMode.Minimal ? 2 : 1),
-            //Top = AppTitleBar.Margin.Top,
-            //Right = AppTitleBar.Margin.Right,
-            //Bottom = AppTitleBar.Margin.Bottom
-        };
     }
 
     private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null)
@@ -82,4 +63,7 @@ public sealed partial class ShellPage : Page
 
         args.Handled = result;
     }
+
+    private void ThemeButton_Click(object sender, RoutedEventArgs e)
+       => ThemeTeachingTip.IsOpen = true;
 }

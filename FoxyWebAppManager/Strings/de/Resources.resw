@@ -165,4 +165,55 @@
   <data name="IconUpdate.ToolTipService.ToolTip" xml:space="preserve">
     <value>In den meisten fällen wird das geänderte Icon erst sichtbar wenn der Explorer neu gestartet wird.</value>
   </data>
+  <data name="Shell_Profiles.Content" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Delete.Content" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Rename.Header" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="Profiles.Text" xml:space="preserve">
+    <value>Profil:</value>
+  </data>
+  <data name="CreateNewProfile.Text" xml:space="preserve">
+    <value>Erstelle neues Profiel</value>
+  </data>
+  <data name="Remove.Header" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Remove.Description" xml:space="preserve">
+    <value>Vorsicht, das Profil wird vollständig entfernt</value>
+  </data>
+  <data name="Rename.Description" xml:space="preserve">
+    <value>Profil umbenennen</value>
+  </data>
+  <data name="RenameB.Content" xml:space="preserve">
+    <value>Änderung Speichern</value>
+  </data>
+  <data name="ProfilName.Header" xml:space="preserve">
+    <value>Name des Profil</value>
+  </data>
+  <data name="ProfileNameInfoBar.Message" xml:space="preserve">
+    <value>Falls ein Profil mit demselben Namen bereits besteht, hat das keine Auswirkung.</value>
+  </data>
+  <data name="ProfileCreateYes" xml:space="preserve">
+    <value>Profil erzeugen</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ProfileRemoveYes" xml:space="preserve">
+    <value>Profil Löschen</value>
+  </data>
+  <data name="ProfileRemove.Message" xml:space="preserve">
+    <value>Willst du wirklich das Profil löschen, dabei werden alle Daten un­wi­der­ruf­lich gelöscht!</value>
+  </data>
+  <data name="Theme.Title" xml:space="preserve">
+    <value>Modus wählen</value>
+  </data>
+  <data name="Theme.Subtitle" xml:space="preserve">
+    <value>Ändern sie die Farbe, die in Foxy Web-App Manager angezeigt werden soll</value>
+  </data>
 </root>

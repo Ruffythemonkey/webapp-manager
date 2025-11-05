@@ -11,7 +11,7 @@ namespace FoxyWebAppManager.Extensions
         {
             if (folder.IsTaskbarTabsJsonExist)
             {
-                return JsonSerializer.Deserialize<FireFoxTaskbarJson>(File.ReadAllText(folder.JsonFile), FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson)
+                return JsonSerializer.Deserialize<FireFoxTaskbarJson>(File.ReadAllText(folder.JsonFile))
                     ?? throw new FormatException();
             }
             return new FireFoxTaskbarJson();
@@ -44,14 +44,14 @@ namespace FoxyWebAppManager.Extensions
             }
             else { hostexist.startUrl = url.ToString(); }
 
-            var jstring = JsonSerializer.Serialize(json, FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson);
+            var jstring = JsonSerializer.Serialize(json);
             File.WriteAllText(folder.JsonFile, jstring);
 
             return (folder, hostexist);
         }
 
         public static string GetWindowsLnkArguments(this (FireFoxMainFolder folder, TaskbarTab taskbarTab) data, Uri uri)
-           => $"\"-taskbar-tab\" \"{data.taskbarTab.id}\" \"-new-window\" \"{uri.Scheme}://{uri.DnsSafeHost}\" \"-profile\" \"{data.folder.ProfielPath}\" \"-container\" \"0\"";
+           => $"\"-taskbar-tab\" \"{data.taskbarTab.id}\" \"-new-window\" \"{uri.Scheme}://{uri.DnsSafeHost}\" \"-profile\" \"{data.folder.ProfilePath}\" \"-container\" \"0\"";
 
 
         /// <summary>

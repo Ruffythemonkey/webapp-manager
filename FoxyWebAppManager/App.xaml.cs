@@ -1,10 +1,9 @@
 ﻿using FoxyWebAppManager.Activation;
 using FoxyWebAppManager.Contracts.Services;
-using FoxyWebAppManager.Helpers;
+using FoxyWebAppManager.Models;
 using FoxyWebAppManager.Services;
 using FoxyWebAppManager.ViewModels;
 using FoxyWebAppManager.Views;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -35,9 +34,11 @@ public partial class App : Application
         return service;
     }
 
-    public static WindowEx MainWindow { get; } = new MainWindow();
+    public static WindowEx MainWindow { get; } 
+        = new MainWindow();
 
-    public static UIElement? AppTitlebar { get; set; }
+    public static AppSettings Settings { get; } 
+        = Extensions.AppSettingsExtensions.GetSettings;
 
     public App()
     {
@@ -63,6 +64,8 @@ public partial class App : Application
             // Core Services
 
             // Views and ViewModels
+            services.AddTransient<ProfilesViewModel>();
+            services.AddTransient<ProfilesPage>();
             services.AddTransient<AppsViewModel>();
             services.AddTransient<AppsPage>();
             services.AddTransient<MainViewModel>();
@@ -86,7 +89,6 @@ public partial class App : Application
     protected async override void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
-
         await App.GetService<IActivationService>().ActivateAsync(args);
     }
 }

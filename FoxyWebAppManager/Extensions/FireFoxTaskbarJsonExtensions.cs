@@ -1,6 +1,5 @@
 ﻿using FoxyWebAppManager.Models;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace FoxyWebAppManager.Extensions
 {
@@ -25,13 +24,13 @@ namespace FoxyWebAppManager.Extensions
             public List<TaskbarTab> GetAvailableWebApps()
             {
                 var Startmenu = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
-                return json.taskbarTabs.Where(x =>
+                return [.. json.taskbarTabs.Where(x =>
                 {
                     var webApp = Path.Combine(Startmenu, x.shortcutRelativePath);
                     var exist = File.Exists(webApp);
                     return exist;
 
-                }).ToList();
+                })];
             }
 
             /// <summary>
@@ -40,7 +39,7 @@ namespace FoxyWebAppManager.Extensions
             /// <param name="profile"></param>
             public void WriteJson(FireFoxProfile profile)
             {
-                var j = JsonSerializer.Serialize(json, FireFoxTaskbarJsonContext.Default.FireFoxTaskbarJson);
+                var j = JsonSerializer.Serialize(json);
                 File.WriteAllText(profile.GetMainFolder().JsonFile,j);
             }
         }

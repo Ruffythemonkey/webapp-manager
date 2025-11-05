@@ -3,8 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using FoxyWebAppManager.Extensions;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
-using static FoxyWebAppManager.Helpers.FireFoxIniParser;
-
 
 namespace FoxyWebAppManager.ViewModels;
 
@@ -26,7 +24,7 @@ public partial class MainViewModel : BaseViewModel
     public partial string FavIcon { get; set; } = "/Assets/WindowIcon.ico";
 
     [ObservableProperty]
-    public partial FireFoxData FireFoxData { get; set; } = FireFoxPathExtensions.GetSavedFireFoxData();
+    public partial FireFoxData FireFoxData { get; set; } = FireFoxDataExtensions.GetSavedFireFoxData();
 
     [ObservableProperty]
     public partial string WebHost { get; set; }
@@ -41,7 +39,18 @@ public partial class MainViewModel : BaseViewModel
     private async Task OpenFavIconFromPath() => await this.OpenIconPathEx();
 
     [RelayCommand(CanExecute = nameof(CanWebAppSaveExecute))]
-    private async Task SaveWebApp() => await SelectedFireFoxProfile.CreateWebApp(new Uri(WebHost.ToUriSchemeString()), FireFoxData.Path, FavIcon);
+    private async Task SaveWebApp()
+    {
+        try
+        {
+            await SelectedFireFoxProfile.CreateWebApp(new Uri(WebHost.ToUriSchemeString()), FireFoxData.Path, FavIcon);
+        }
+        catch (Exception ex)
+        {
+
+           await ex.ShowMessageUI();
+        }
+    }
 
     [RelayCommand]
     private void SwitchUserChrome(bool activate) =>
@@ -50,13 +59,10 @@ public partial class MainViewModel : BaseViewModel
     partial void OnWebHostChanged(string value)
       => _ = this.ChangeFavIconByWebHostChanged();
 
-    public override void OnNavigatedFrom()
-    {
-        //throw new NotImplementedException();
-    }
+    public override void OnNavigatedFrom(){}
 
     public override void OnNavigatedTo(object parameter)
-        => FoxProfiles ??= IniReaderFireFox.LoadProfilesFromInstalledFF();
+        => FoxProfiles ??= FireFoxIniParser.LoadProfilesFromInstalledFF();
 
     partial void OnSelectedFireFoxProfileChanged(FireFoxProfile value) 
         => IsCustomizeUserStyle = new FireFoxCssHelper(SelectedFireFoxProfile).IsUserChromeActive;
@@ -65,7 +71,7 @@ public partial class MainViewModel : BaseViewModel
     {
         if (value.Count > 0)
         {
-            SelectedFireFoxProfile = value.First();
+            SelectedFireFoxProfile ??= value.First();
         }
     }
 
