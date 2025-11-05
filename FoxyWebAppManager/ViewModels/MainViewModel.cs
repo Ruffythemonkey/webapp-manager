@@ -39,7 +39,18 @@ public partial class MainViewModel : BaseViewModel
     private async Task OpenFavIconFromPath() => await this.OpenIconPathEx();
 
     [RelayCommand(CanExecute = nameof(CanWebAppSaveExecute))]
-    private async Task SaveWebApp() => await SelectedFireFoxProfile.CreateWebApp(new Uri(WebHost.ToUriSchemeString()), FireFoxData.Path, FavIcon);
+    private async Task SaveWebApp()
+    {
+        try
+        {
+            await SelectedFireFoxProfile.CreateWebApp(new Uri(WebHost.ToUriSchemeString()), FireFoxData.Path, FavIcon);
+        }
+        catch (Exception ex)
+        {
+
+           await ex.ShowMessageUI();
+        }
+    }
 
     [RelayCommand]
     private void SwitchUserChrome(bool activate) =>

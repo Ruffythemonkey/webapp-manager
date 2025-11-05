@@ -32,6 +32,7 @@ public partial class AppsViewModel : BaseViewModel
     [RelayCommand]
     private void RemoveWebAppUi(TaskbarTab item) => this.RemoveWebApp(item, SelectedProfil);
 
+    //Todo: Bug, wenn null
     partial void OnFoxProfilesChanged(List<FireFoxProfile> value)
          => _dispatcherQueue.TryEnqueue(() => SelectedProfil = value.FirstOrDefault()!);
 
