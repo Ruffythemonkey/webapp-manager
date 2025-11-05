@@ -12,8 +12,8 @@ namespace FoxyWebAppManager.Extensions
             {
                 vm.FoxProfiles = FireFoxIniParser.LoadProfilesFromInstalledFF()
                .Where(x => x.GetMainFolder().GetJson().taskbarTabs.IsAnyTaskBarTabItemInStartMenu())
-               .ToList()
-               is { Count: > 0 } apps ? apps : null!;
+               .ToList();
+               //is { Count: > 0 } apps ? apps : null!;
             }
 
             public void RemoveWebApp(TaskbarTab tab, FireFoxProfile profile)
