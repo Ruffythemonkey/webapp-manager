@@ -3,11 +3,15 @@ using FoxyWebAppManager.Models;
 using FoxyWebAppManager.Extensions;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using Microsoft.UI.Xaml;
 
 namespace FoxyWebAppManager.ViewModels;
 
 public partial class AppsViewModel : BaseViewModel
 {
+
+    public static Visibility IsWebAppEditShow(ObservableCollection<TaskbarTab> tabs)
+        => tabs.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
 
     [ObservableProperty]
     public partial List<FireFoxProfile> FoxProfiles { get; set; }
