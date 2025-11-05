@@ -45,7 +45,6 @@
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="TLDExtractor" Version="1.0.2" />
     <PackageReference Include="WinUIEx" Version="2.9.0" />
-    <!--<PackageReference Include="WinUIEx" Version="2.9.0" />-->
   </ItemGroup>
 
   <ItemGroup>
