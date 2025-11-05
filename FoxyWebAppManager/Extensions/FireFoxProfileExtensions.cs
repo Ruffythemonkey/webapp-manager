@@ -28,7 +28,8 @@ namespace FoxyWebAppManager.Extensions
             /// <returns></returns>
             public async Task CreateWebApp(Uri url, string firfoxPath, string iconPath)
             {
-
+                //Todo: Sites can produce 403, bug Telekom.de
+                ///Can produce 403 see Methode
                 url = await url.UriMovedCheckup();
 
                 var setJson = profile
