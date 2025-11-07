@@ -12,7 +12,7 @@
         <InfoBar
             IsClosable="False"
             IsOpen="True"
-            Message="{x:Bind Message, Mode=OneWay}"
+            Message="{x:Bind Message}"
             Severity="Error" />
     </Grid>
 </Page>

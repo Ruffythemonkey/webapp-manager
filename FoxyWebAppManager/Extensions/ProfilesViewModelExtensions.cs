@@ -1,39 +1,66 @@
-﻿using FoxyWebAppManager.ContentDialogs;
+﻿using CommunityToolkit.WinUI;
+using FoxyWebAppManager.ContentDialogs;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
 using FoxyWebAppManager.ViewModels;
 using Microsoft.UI.Xaml.Controls;
-using System.Threading.Tasks;
 namespace FoxyWebAppManager.Extensions
 {
     public static class ProfilesViewModelExtensions
     {
         extension(ProfilesViewModel vm)
         {
+            /// <summary>
+            /// Try Remove Profile completely
+            /// </summary>
+            /// <param name="profile"></param>
+            /// <returns></returns>
+            /// <exception cref="FoxyException"></exception>
             public async Task RemoveProfile(FireFoxProfile profile)
             {
-                ContentDialog dialog = new DialogRemoveProfile().ContentDialog;
 
-                if (await dialog.ShowAsync() == ContentDialogResult.Secondary)
+                try
                 {
-                    return;
+
+                    //Prof is Profile in Use, when throw FoxyException
+                    if (profile.IsProfileInUse())
+                    {
+                        throw new FoxyException($"ProfileRemoveInUser"
+                            .GetLocalized()!
+                            .Replace("{profile.Name}",$"{profile.Name}"));
+                    }
+
+                    ContentDialog dialog = new DialogRemoveProfile().ContentDialog;
+
+                    if (await dialog.ShowAsync() == ContentDialogResult.Secondary)
+                    {
+                        return;
+                    }
+
+                    //loads all Profiles and gives a List without the one removing Profile
+                    var keepProfiles = FireFoxIniParser
+                        .LoadProfilesFromInstalledFF()
+                        .Where(x => !x.Equals(profile))
+                        .ToList();
+
+                    //write the FirefoxProfile.ini
+                    keepProfiles.AttachProfilesToIniFile();
+                    //Remove the selected FF Profile
+                    profile.RemoveProfileFolder();
+
+                    vm.FireFoxProfiles.ReloadFireFoxProfiles();
                 }
+                catch (Exception ex)
+                {
 
-
-                //loads all Profiles and gives a List without the one removing Profile
-                var keepProfiles = FireFoxIniParser
-                    .LoadProfilesFromInstalledFF()
-                    .Where(x => !x.Equals(profile))
-                    .ToList();
-
-                //write the FirefoxProfile.ini
-                keepProfiles.AttachProfilesToIniFile();
-                //Remove the selected FF Profile
-                profile.RemoveProfileFolder();
-
-                vm.FireFoxProfiles.ReloadFireFoxProfiles();
+                    await ex.ShowMessageUIAsync();
+                }
             }
 
+            /// <summary>
+            /// Create FF Profile with FireFox own Profile Creator
+            /// </summary>
+            /// <returns></returns>
             public async Task CreateProfile()
             {
                 ContentDialog dialog = new DialogRenameProfile().ContentDialog;

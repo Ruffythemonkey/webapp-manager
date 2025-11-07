@@ -1,4 +1,6 @@
 ﻿using FoxyWebAppManager.Models;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace FoxyWebAppManager.Extensions
 {
@@ -103,6 +105,16 @@ namespace FoxyWebAppManager.Extensions
             /// <returns></returns>
             public string GetProfileMainDirectory()
                 => new DirectoryInfo(profile.GetMainFolder().ProfilePath).Parent!.FullName;
+
+            /// <summary>
+            /// Opens the RomaingFolder in Explorer
+            /// </summary>
+            /// <returns></returns>
+            public async Task OpenRoamingFolder()
+            {
+                using Process process = new();
+                await process.OpenPathInExplorer(profile.GetMainFolder().ProfilePath);
+            }
         }
 
         extension(IEnumerable<FireFoxProfile> profiles)
@@ -115,10 +127,10 @@ namespace FoxyWebAppManager.Extensions
             public Dictionary<FireFoxProfile, bool> IsProfilesInUse()
             {
                 var ret = new Dictionary<FireFoxProfile, bool>();
-                
+
                 foreach (var item in profiles)
                     ret.TryAdd(item, item.IsProfileInUse());
-                
+
                 return ret;
             }
         }

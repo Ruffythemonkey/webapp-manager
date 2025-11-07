@@ -216,4 +216,13 @@
   <data name="Theme.Subtitle" xml:space="preserve">
     <value>Ändern sie die Farbe, die in Foxy Web-App Manager angezeigt werden soll</value>
   </data>
+  <data name="OpenRoamingProfile.Header" xml:space="preserve">
+    <value>Profil Roaming Ordner</value>
+  </data>
+  <data name="Open.Content" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="ProfileRemoveInUser" xml:space="preserve">
+    <value>Das Profil {profile.Name} wird gerade ausgeführt. Bitte schließen Sie Firefox und versuchen Sie es erneut.</value>
+  </data>
 </root>

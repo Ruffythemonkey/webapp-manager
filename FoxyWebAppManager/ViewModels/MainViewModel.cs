@@ -48,7 +48,7 @@ public partial class MainViewModel : BaseViewModel
         catch (Exception ex)
         {
 
-           await ex.ShowMessageUI();
+           await ex.ShowMessageUIAsync();
         }
     }
 

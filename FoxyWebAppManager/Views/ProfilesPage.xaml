@@ -2,6 +2,7 @@
     x:Class="FoxyWebAppManager.Views.ProfilesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:a="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:FoxyWebAppManager.Behaviors"
     xmlns:cc="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -31,6 +32,9 @@
                     <StandardUICommand
                         x:Key="RemoveProfile"
                         Command="{x:Bind ViewModel.RemoveProfileUICommand}" />
+                    <StandardUICommand
+                        x:Key="OpenRoaming"
+                        Command="{x:Bind ViewModel.OpenRoamingProfileCommand}" />
                 </ItemsRepeater.Resources>
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate
@@ -39,6 +43,9 @@
                         <cc:SettingsExpander
                             Description="{x:Bind Section}"
                             Header="{x:Bind Name}">
+                            <cc:SettingsExpander.HeaderIcon>
+                                <FontIcon Glyph="&#xE77B;" />
+                            </cc:SettingsExpander.HeaderIcon>
                             <cc:SettingsExpander.Items>
 
                                 <!--<cc:SettingsCard
@@ -60,6 +67,7 @@
                                 </cc:SettingsCard>-->
 
 
+
                                 <cc:SettingsCard
                                     x:Uid="Remove"
                                     HeaderIcon="{ui:FontIcon Foreground=Red,
@@ -70,6 +78,21 @@
                                         CommandParameter="{x:Bind}"
                                         Style="{StaticResource AccentButtonStyle}" />
                                 </cc:SettingsCard>
+                                <cc:SettingsCard
+                                    x:Uid="OpenRoamingProfile"
+                                    ActionIcon="{ui:FontIcon Glyph=&#xE8A7;}"
+                                    Description="{x:Bind Path}"
+                                    HeaderIcon="{ui:FontIcon Glyph=&#xE8DA;}"
+                                    IsClickEnabled="True">
+                                    <a:Interaction.Behaviors>
+                                        <a:EventTriggerBehavior EventName="Click">
+                                            <a:InvokeCommandAction
+                                                Command="{StaticResource OpenRoaming}"
+                                                CommandParameter="{x:Bind}" />
+                                        </a:EventTriggerBehavior>
+                                    </a:Interaction.Behaviors>
+                                </cc:SettingsCard>
+
 
                             </cc:SettingsExpander.Items>
                         </cc:SettingsExpander>

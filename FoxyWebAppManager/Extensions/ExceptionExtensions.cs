@@ -6,7 +6,7 @@ namespace FoxyWebAppManager.Extensions
     {
         extension(Exception exception)
         {
-            public async Task ShowMessageUI()
+            public async Task ShowMessageUIAsync()
             {
                 var MessageDialog = new DialogException() { Message = exception.Message};
                 await MessageDialog.ContentDialog.ShowAsync();

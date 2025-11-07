@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using FoxyWebAppManager.Collections;
 using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
 using FoxyWebAppManager.Extensions;
-using System.Threading.Tasks;
 
 namespace FoxyWebAppManager.ViewModels;
 
@@ -17,6 +15,8 @@ public partial class ProfilesViewModel() : BaseViewModel
     [RelayCommand]
     private async Task CreateProfileUI() => await this.CreateProfile();
 
+    [RelayCommand]
+    private async Task OpenRoamingProfile(FireFoxProfile profile) => await profile.OpenRoamingFolder();
 
     public override void OnNavigatedFrom(){}
 

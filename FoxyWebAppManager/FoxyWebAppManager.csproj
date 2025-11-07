@@ -16,13 +16,14 @@
     <EnableMsixTooling>false</EnableMsixTooling>
 	<WindowsPackageType>None</WindowsPackageType>
 	<DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>  
   </PropertyGroup>
 
 
 	<PropertyGroup>
-		<NoWarn>$(NoWarn);CS0612</NoWarn>
 		<NoWarn>$(NoWarn);CA1822</NoWarn>
-		<NoWarn>$(NoWarn);IDE1006</NoWarn>
+		<!--<NoWarn>$(NoWarn);CS0612</NoWarn>
+		<NoWarn>$(NoWarn);IDE1006</NoWarn>-->
 		<Version>1.1.0</Version>
 	</PropertyGroup>
 
