@@ -17,5 +17,12 @@ namespace FoxyWebAppManager.ViewModels
         public abstract void OnNavigatedFrom();
         public abstract void OnNavigatedTo(object parameter);
 
+        /// <summary>
+        /// Create OnProperty Changed for Extensions usefull
+        /// </summary>
+        /// <param name="propName"></param>
+        public void PropChanged(string propName)
+            => this.OnPropertyChanged(propName);
+
     }
 }

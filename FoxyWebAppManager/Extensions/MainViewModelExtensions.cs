@@ -20,9 +20,8 @@ namespace FoxyWebAppManager.Extensions
                 var file = await openPicker.PickSingleFileAsync();
                 if (file != null)
                 {
-                    var ffd = new FireFoxData() { Path = file.Path };
-                    ffd.Save();
-                    viewModel.FireFoxData = ffd;
+                    App.Settings.FireFoxApp.Path = file.Path;
+                    //viewModel.PropChanged(nameof(viewModel.FireFoxData));
                 }
             }
 
@@ -97,5 +96,7 @@ namespace FoxyWebAppManager.Extensions
             }
 
         }
+
+    
     }
 }

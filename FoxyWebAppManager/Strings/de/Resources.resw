@@ -223,6 +223,6 @@
     <value>Öffnen</value>
   </data>
   <data name="ProfileRemoveInUser" xml:space="preserve">
-    <value>Das Profil {profile.Name} wird gerade ausgeführt. Bitte schließen Sie Firefox und versuchen Sie es erneut.</value>
+    <value>Das Profil "{0}" wird gerade ausgeführt. Bitte schließen Sie Firefox und versuchen Sie es erneut.</value>
   </data>
 </root>

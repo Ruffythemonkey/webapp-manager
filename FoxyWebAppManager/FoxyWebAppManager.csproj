@@ -22,8 +22,9 @@
 
 	<PropertyGroup>
 		<NoWarn>$(NoWarn);CA1822</NoWarn>
-		<!--<NoWarn>$(NoWarn);CS0612</NoWarn>
-		<NoWarn>$(NoWarn);IDE1006</NoWarn>-->
+		<NoWarn>$(NoWarn);CS0612</NoWarn>
+		<NoWarn>$(NoWarn);CsWinRT1028</NoWarn>
+		<!--<NoWarn>$(NoWarn);IDE1006</NoWarn>-->
 		<Version>1.1.0</Version>
 	</PropertyGroup>
 

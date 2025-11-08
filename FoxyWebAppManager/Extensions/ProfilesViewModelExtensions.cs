@@ -25,9 +25,8 @@ namespace FoxyWebAppManager.Extensions
                     //Prof is Profile in Use, when throw FoxyException
                     if (profile.IsProfileInUse())
                     {
-                        throw new FoxyException($"ProfileRemoveInUser"
-                            .GetLocalized()!
-                            .Replace("{profile.Name}",$"{profile.Name}"));
+                        throw new FoxyException(string.Format("ProfileRemoveInUser"
+                            .GetLocalized()!, profile.Name));
                     }
 
                     ContentDialog dialog = new DialogRemoveProfile().ContentDialog;
@@ -71,7 +70,7 @@ namespace FoxyWebAppManager.Extensions
                 {   
                     //Create Process =>
                     str = str.Trim();
-                    var p = FireFoxDataExtensions.GetSavedFireFoxData();
+                    var p = App.Settings.FireFoxApp.GetSavedFireFoxData();
                     if (p is FireFoxData fire)
                     {
                         await fire.CreateProfile(str);

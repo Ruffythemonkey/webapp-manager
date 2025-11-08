@@ -6,12 +6,8 @@ namespace FoxyWebAppManager.Extensions
 {
     public static class FireFoxDataExtensions
     {
-        private static readonly string dataPath = LocalDataAppPath.LocalDataFile("ffpath.json");
-
-
         extension(FireFoxData foxData)
         {
-
             public async Task CreateProfile(string name)
             {
                 using var p = new Process();
@@ -24,29 +20,24 @@ namespace FoxyWebAppManager.Extensions
                 await p.WaitForExitAsync();
             }
 
-            public void Save()
+            public FireFoxData GetSavedFireFoxData()
             {
-                var s = JsonSerializer.Serialize(foxData);
-                File.WriteAllText(dataPath, s);
+                var programm = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                var defFireFox = Path.Combine(programm, @"Mozilla Firefox\Firefox.exe");
+
+
+                if (File.Exists(App.Settings.FireFoxApp.Path))
+                {
+                    return App.Settings.FireFoxApp;
+                }
+                else if (File.Exists(defFireFox))
+                {
+                    App.Settings.FireFoxApp.Path = defFireFox;
+                }
+                return App.Settings.FireFoxApp;
             }
         }
 
-        public static FireFoxData GetSavedFireFoxData()
-        {
-            var programm = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            var defFireFox = Path.Combine(programm, @"Mozilla Firefox\Firefox.exe");
-
-            if (File.Exists(dataPath))
-            {
-                var fr = File.ReadAllText(dataPath);
-                return JsonSerializer.Deserialize<FireFoxData>(fr)!;
-            }
-            else if (File.Exists(defFireFox))
-            {
-                return new FireFoxData() { Path = defFireFox };
-            }
-            return new FireFoxData();
-        }
 
     }
 }

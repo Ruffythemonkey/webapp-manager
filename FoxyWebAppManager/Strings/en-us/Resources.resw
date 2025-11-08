@@ -223,6 +223,6 @@
     <value>Open</value>
   </data>
   <data name="ProfileRemoveInUser" xml:space="preserve">
-    <value>Profile {profile.Name} is running now. please close Firefox and try again</value>
+    <value>Profile "{0}" is running now. please close Firefox and try again</value>
   </data>
 </root>

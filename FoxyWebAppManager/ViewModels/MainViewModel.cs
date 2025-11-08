@@ -24,7 +24,7 @@ public partial class MainViewModel : BaseViewModel
     public partial string FavIcon { get; set; } = "/Assets/WindowIcon.ico";
 
     [ObservableProperty]
-    public partial FireFoxData FireFoxData { get; set; } = FireFoxDataExtensions.GetSavedFireFoxData();
+    public partial FireFoxData FireFoxData { get; set; } = App.Settings.FireFoxApp;
 
     [ObservableProperty]
     public partial string WebHost { get; set; }
@@ -74,5 +74,7 @@ public partial class MainViewModel : BaseViewModel
             SelectedFireFoxProfile ??= value.First();
         }
     }
+
+
 
 }
