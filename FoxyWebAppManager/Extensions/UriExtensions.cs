@@ -9,15 +9,14 @@
             /// </summary>
             /// <returns>escsoft</returns>
             public string GetDomainNameWithoutExtension()
-                => Task.Run(() => TLDExtractor.TLDExtractor.Extract(uri)).GetAwaiter().GetResult().Domain;
-
+                => TLDExtract.TLDExtractor.Extract(uri).Domain;
 
             /// <summary>
             /// bsp input https://www.escsoft.de
             /// </summary>
             /// <returns>escsoft.de</returns>
             public string GetTopLevelDomain()
-               => $"{uri.Scheme}://{Task.Run(() => TLDExtractor.TLDExtractor.Extract(uri)).GetAwaiter().GetResult().EffectiveDomain}";
+               => $"{uri.Scheme}://{TLDExtract.TLDExtractor.Extract(uri).EffectiveDomain}";
 
 
             public bool DomainHasSubLevelDomain()
