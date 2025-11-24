@@ -1,6 +1,7 @@
 ﻿using FoxyWebAppManager.Helpers;
 using FoxyWebAppManager.Models;
 using FoxyWebAppManager.ViewModels;
+using IpDnsDomain.Models;
 using Microsoft.Windows.Storage.Pickers;
 
 namespace FoxyWebAppManager.Extensions
@@ -21,7 +22,6 @@ namespace FoxyWebAppManager.Extensions
                 if (file != null)
                 {
                     App.Settings.FireFoxApp.Path = file.Path;
-                    //viewModel.PropChanged(nameof(viewModel.FireFoxData));
                 }
             }
 
@@ -47,11 +47,14 @@ namespace FoxyWebAppManager.Extensions
             {
                 try
                 {
-                    var url = viewModel.WebHost.ToUriSchemeString();
-                    
-                    if (url.IsUrl() && await url.IsDnsResolvableUrlAsync())
+                    //var url = viewModel.WebHost.ToUriSchemeString();
+
+                    if ((await IpDnsDomain.DomainValidator.TryGetIpDnsUrlAsync(viewModel.WebHost)) is IpDnsUrl result)
                     {
-                        var loadedFavIcon = await FavIconHelper.IconLoadAsync(new Uri(url));
+
+                        //TODO:Locale Adressen werden auch aufgelöst
+
+                        var loadedFavIcon = await FavIconHelper.IconLoadAsync(new Uri(result.ReachableUrl));
 
                         viewModel._dispatcherQueue.TryEnqueue(() =>
                         {
@@ -97,6 +100,6 @@ namespace FoxyWebAppManager.Extensions
 
         }
 
-    
+
     }
 }

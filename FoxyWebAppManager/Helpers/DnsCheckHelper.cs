@@ -1,13 +1,24 @@
 ﻿using System.Net;
+using System.Runtime.Loader;
 
 namespace FoxyWebAppManager.Helpers
 {
     public static class DnsCheckHelper
     {
+
+        
+
         public static async Task<bool> IsDnsResolvableUrlAsync(this string url)
         {
             try
             {
+                //Prüft, ob die Url eine Ip ist
+                if (IPAddress.TryParse(url, out var address))
+                {
+                    
+                }
+                
+
                 // Prüfen, ob die URL gültig ist
                 if (!Uri.TryCreate(url, UriKind.Absolute, out var uri) || string.IsNullOrEmpty(uri.Host))
                     return false;

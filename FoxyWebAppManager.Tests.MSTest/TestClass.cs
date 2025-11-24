@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using FoxyWebAppManager.Helpers;
 using Microsoft.UI.Xaml.Controls;
+using FoxyWebAppManager.Extensions;
 
 namespace FoxyWebAppManager.Tests.MSTest;
 
@@ -37,17 +39,14 @@ public class TestClass
     }
 
     [TestMethod]
-    public void TestMethod()
+    public async Task TestMethod()
     {
-
-        var profiles = Helpers.FireFoxIniParser.LoadProfilesFromInstalledFF();
-
-        profiles.RemoveAt(1);
-
-        profiles.AttachProfilesToIniFile();
+        var address = "heise.de".ToUriSchemeString();
+        var x = await address.CompleteCheckUpUrl();
 
 
-        Assert.IsTrue(true);
+        Assert.IsTrue(x);
+        await Task.CompletedTask;
     }
 
     [UITestMethod]
