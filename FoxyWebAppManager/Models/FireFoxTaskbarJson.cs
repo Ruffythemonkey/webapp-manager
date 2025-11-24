@@ -23,5 +23,16 @@
         public int userContextId { get; set; }
         public string startUrl { get; set; } = null!;
         public string shortcutRelativePath { get; set; } = null!;
+
+        public override bool Equals(object? obj)
+        {
+            return obj is TaskbarTab tab &&
+                   shortcutRelativePath == tab.shortcutRelativePath;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(shortcutRelativePath);
+        }
     }
 }
