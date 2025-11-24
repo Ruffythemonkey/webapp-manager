@@ -1,4 +1,5 @@
-﻿using FoxyWebAppManager.Models;
+﻿using FoxyWebAppManager.Helpers;
+using FoxyWebAppManager.Models;
 using Microsoft.Windows.Storage.Pickers;
 using System.Text.Json;
 
@@ -72,6 +73,9 @@ namespace FoxyWebAppManager.Extensions
             {
                 var env_startmenu = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
                 var lnkPath = Path.Combine(env_startmenu, taskbarTab.shortcutRelativePath);
+                
+                Psi.UnpinTaskbar(lnkPath);
+
                 if (File.Exists(lnkPath))
                     File.Delete(lnkPath);
 
