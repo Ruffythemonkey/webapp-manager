@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Net;
 
 namespace FavIconlib.AbstractClasses
 {
@@ -8,14 +6,15 @@ namespace FavIconlib.AbstractClasses
     {
         private readonly HttpClient _client = new HttpClient(new HttpClientHandler()
         {
-            AllowAutoRedirect = true
+            AllowAutoRedirect = true,
+            AutomaticDecompression = DecompressionMethods.All
         })
         {
             Timeout = TimeSpan.FromSeconds(3)
         };
 
         public Web()
-            => UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0";
+            => SetClient();
 
         public string UserAgent
         {
@@ -30,10 +29,30 @@ namespace FavIconlib.AbstractClasses
             }
         }
 
+        private void SetClient()
+        {
+            _client.DefaultRequestVersion = HttpVersion.Version30;
+            _client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrLower;
+            _client.DefaultRequestHeaders.Add("Accept", "*/*");
+            _client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0";
+        }
+
+        private CancellationTokenSource _tokenSource = new();
+
         public TimeSpan Timeout { get => _client.Timeout; set => _client.Timeout = value; }
 
         public async Task<HttpResponseMessage> GetAsync(string url)
-            => await _client.GetAsync(url);
+        {
+            await RegenerateTokenSource();
+            return await _client.GetAsync(url, _tokenSource.Token);
+        }
 
+        private async Task RegenerateTokenSource()
+        {
+            await _tokenSource.CancelAsync();
+            _tokenSource.Dispose();
+            _tokenSource = new CancellationTokenSource();
+        }
     }
 }

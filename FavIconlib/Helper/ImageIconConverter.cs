@@ -11,7 +11,7 @@ namespace FavIconlib.Helper
         {
             var svgDocument = new SKSvg();
             svgDocument.Load(svgFilePath);
-
+            
 
             using (var bitmap = new SKBitmap((int)svgDocument.Picture!.CullRect.Width, (int)svgDocument.Picture.CullRect.Height))
             using (var canvas = new SKCanvas(bitmap))
@@ -22,6 +22,7 @@ namespace FavIconlib.Helper
                 using (var data = image.Encode())
                 using (var stream = File.OpenWrite(pngFilePath))
                 {
+                  
                     data.SaveTo(stream);
                 }
             }
@@ -121,8 +122,10 @@ namespace FavIconlib.Helper
         /// <returns>Wether or not the icon was succesfully generated</returns>
         public static bool ConvertToIcon(string inputPath, string outputPath, int size = 64, bool preserveAspectRatio = false)
         {
+
             using FileStream inputStream = new FileStream(inputPath, FileMode.Open);
             using FileStream outputStream = new FileStream(outputPath, FileMode.OpenOrCreate);
+            
             return ConvertToIcon(inputStream, outputStream, size, preserveAspectRatio);
         }
     }

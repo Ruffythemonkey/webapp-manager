@@ -6,7 +6,7 @@ namespace FavIconlib
     {
         private static readonly FavIconFetcher _fetcher = new();
 
-        public static async Task<string> Test(string url)
-            => await _fetcher.FavIconFetchSelf(url);
+        public static async Task<Stream> Test(string url, int size)
+            => await _fetcher.FavIconFetchSelf(url, size);
     }
 }
