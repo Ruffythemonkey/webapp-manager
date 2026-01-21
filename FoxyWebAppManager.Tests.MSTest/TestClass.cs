@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Net;
+using System.Threading.Tasks;
 using FoxyWebAppManager.Helpers;
 using Microsoft.UI.Xaml.Controls;
 
@@ -55,4 +57,26 @@ public class TestClass
     {
         Assert.AreEqual(0, new Grid().ActualWidth);
     }
+
+    [TestMethod]
+    public async Task WebTestMethod()
+    {
+        var uri = new Uri("https://www.crunchyroll.com");
+        
+        using var client = new HttpClient();
+	    client.DefaultRequestHeaders.Clear();
+        client.DefaultRequestVersion = HttpVersion.Version20;
+        client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrLower;
+	
+		client.DefaultRequestHeaders.Add("User-Agent", "FoxyWebAppManager-TestClient");
+        client.DefaultRequestHeaders.Add("Accept", "*/*");
+        client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
+        client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+
+		var req = await client.GetAsync(uri,HttpCompletionOption.ResponseContentRead);
+        req.EnsureSuccessStatusCode();  
+
+
+		//Assert.AreEqual();
+	}
 }
