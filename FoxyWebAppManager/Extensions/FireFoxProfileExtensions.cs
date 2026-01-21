@@ -30,7 +30,7 @@ namespace FoxyWebAppManager.Extensions
             {
                 //Todo: Sites can produce 403, bug Telekom.de
                 ///Can produce 403 see Methode
-                url = await url.UriMovedCheckup();
+               // url = await url.UriMovedCheckup();
 
                 var setJson = profile
                     .GetMainFolder()
